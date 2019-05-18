@@ -7,6 +7,9 @@ namespace TaskUser.Filters
 {
     /// <summary>
     /// Quyen truy cap vao cac trang
+    /// {
+    /// ckeck dang nhap 
+    /// }
     /// OnActionExecuting chạy trước
     /// OnActionExecuted chạy sau 
     /// </summary>
