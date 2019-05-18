@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using TaskUser.Models;
+using TaskUser.Models.Production;
+using TaskUser.ViewsModels.StockViewsModels;
+
+namespace TaskUser.Service
+{
+   
+    public interface IStockService
+    {
+        Task<List<StockViewModels>> GetStockListAsync();
+        
+        Task<StockViewModels> AddStockAsync(StockViewModels addStock);
+
+        IEnumerable<Stock> GetStock();
+        
+        Task<StockViewModels> GetIdStock(int? productId , int? storeId);
+
+        Task<StockViewModels> EditStock(int? productId , int? storeId, StockViewModels editStock);
+
+        void Delete(int? productId, int? storeId);
+
+    }
+
+    public class StockService : IStockService
+    {
+        private readonly DataContext _context;
+        private readonly IMapper _mapper;
+
+        public StockService(DataContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+       //get show list stock
+        public async Task<List<StockViewModels>> GetStockListAsync()
+        {
+            var list = await _context.Stocks.ToListAsync();
+            var listStock = _mapper.Map<List<StockViewModels>>(list);
+            return listStock;
+        }
+
+        public IEnumerable<Stock> GetStock()
+        {
+            return _context.Stocks;
+        } 
+        //get create stock
+        public async Task<StockViewModels> AddStockAsync(StockViewModels addStock)
+        {
+            var ckeck =await _context.Stocks.FindAsync(addStock.ProductId, addStock.StoreId);
+            if (ckeck!=null)
+            {
+                ckeck.Quantity += addStock.Quantity;
+                _context.Stocks.Update(ckeck);
+               await _context.SaveChangesAsync();
+                return addStock;
+
+            }
+            else
+            {
+                var stock = new Stock()
+                {
+           
+                    ProductId = addStock.ProductId,
+                    StoreId = addStock.StoreId,
+                    Quantity = addStock.Quantity
+                
+                    
+                };
+
+                _context.Stocks.Add(stock);
+                await _context.SaveChangesAsync();
+                return addStock;
+                
+            }
+
+        }
+        //get id edit stock
+        public async Task<StockViewModels> GetIdStock(int? productId , int? storeId)
+        {
+            var findStock = await _context.Stocks.FindAsync(productId,storeId);
+           
+            var stockDtos = _mapper.Map<StockViewModels>(findStock);
+            return stockDtos;
+        }
+        // post edit stock
+        public async Task<StockViewModels> EditStock(int? productId , int? storeId, StockViewModels editStock)
+        {
+            try
+            {
+                var ckeckEdit = await _context.Stocks.FindAsync(productId,storeId);
+                ckeckEdit.Quantity = editStock.Quantity;
+                _context.Stocks.Update(ckeckEdit);
+                await _context.SaveChangesAsync();
+                return editStock;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+            
+        }
+        //delete stock
+        public void Delete(int? productId , int? storeId)
+        {
+            var stock = _context.Stocks.FirstOrDefault(x=>x.ProductId == productId && x.StoreId == storeId);
+            if (stock == null) 
+                return;
+            _context.Stocks.Remove(stock);
+            _context.SaveChanges();
+        }
+       
+    }
+    
+}
