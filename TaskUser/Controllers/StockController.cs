@@ -94,7 +94,7 @@ namespace TaskUser.Controllers
             }
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName");
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
-            var getStock = await _stockService.GetIdStock(productId,storeId);
+            var getStock = await _stockService.GetIdStockAsync(productId.Value, storeId.Value);
            
             return View(getStock);
         }
@@ -106,7 +106,7 @@ namespace TaskUser.Controllers
         /// <param name="editStock"></param>
         /// <returns>view index of edir</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int productId,int storeId,StockViewModels editStock)
+        public async Task<IActionResult> Edit(int ?productId,int ?storeId,StockViewModels editStock)
         {
            
             if (ModelState.IsValid)
@@ -115,7 +115,7 @@ namespace TaskUser.Controllers
                     if (productId == editStock.ProductId && storeId==editStock.StoreId)
                     {
                         
-                        await _stockService.EditStock(productId,storeId,editStock);
+                        await _stockService.EditStockAsync(productId.Value,storeId.Value,editStock);
                         TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                         return RedirectToAction("Index");
                     }

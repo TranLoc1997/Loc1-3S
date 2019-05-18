@@ -15,8 +15,8 @@ namespace TaskUser.Service
         Task<List<CategoryViewsModels>> GetCategoryListAsync();
         Task<CategoryViewsModels> AddCategoryAsync(CategoryViewsModels addCategory);
         IEnumerable<Category> GetCategory();
-        Task<CategoryViewsModels> GetIdCategory(int? id);
-        Task<CategoryViewsModels> EditCategory(int?id, CategoryViewsModels editCategory);
+        Task<CategoryViewsModels> GetIdCategoryAsync(int id);
+        Task<CategoryViewsModels> EditCategoryAsync(int id, CategoryViewsModels editCategory);
         bool IsExistedName(int id, string name);
         void Delete(int id);
     }
@@ -58,18 +58,18 @@ namespace TaskUser.Service
             return _context.Categories;
         }
         //get edit category
-        public async Task<CategoryViewsModels> GetIdCategory(int? id)
+        public async Task<CategoryViewsModels> GetIdCategoryAsync(int id)
         {
             var findCategory=await _context.Categories.FindAsync(id);
             var categoryDtos = _mapper.Map<CategoryViewsModels>(findCategory);
             return categoryDtos;
         }
         //post edit category
-        public async Task<CategoryViewsModels> EditCategory(int?id, CategoryViewsModels editCategory)
+        public async Task<CategoryViewsModels> EditCategoryAsync(int id, CategoryViewsModels editCategory)
         {
             try
             {
-                var category =_context.Categories.Find(id);
+                var category =await _context.Categories.FindAsync(id);
             
                 category.CategoryName = editCategory.CategoryName;
             

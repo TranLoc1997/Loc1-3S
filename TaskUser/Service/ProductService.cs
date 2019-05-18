@@ -18,8 +18,8 @@ namespace TaskUser.Service
 
         IEnumerable<Product> GetProduct();
 //        Task<AddStoreViewModels> Create(AddStoreViewModels addStore);
-        Task<ProductViewsModels> GetIdProduct(int? id);
-        Task<ProductViewsModels> EditProduct(int? id, ProductViewsModels editProduct);
+        Task<ProductViewsModels> GetIdProductAsync(int id);
+        Task<ProductViewsModels> EditProductAsync(int id, ProductViewsModels editProduct);
         void Delete(int id);
     }
 
@@ -70,14 +70,14 @@ namespace TaskUser.Service
             
         }
         //edit get product
-        public async Task<ProductViewsModels> GetIdProduct(int? id)
+        public async Task<ProductViewsModels> GetIdProductAsync(int id)
         {
             var findProduct= await _context.Products.FindAsync(id);
             var productDtos = _mapper.Map<ProductViewsModels>(findProduct);
             return productDtos;
         }
         // edit post product
-        public async Task<ProductViewsModels> EditProduct(int? id, ProductViewsModels editProduct)
+        public async Task<ProductViewsModels> EditProductAsync(int id, ProductViewsModels editProduct)
         {
             try
             {

@@ -16,8 +16,8 @@ namespace TaskUser.Service
         Task<List<BrandViewsModels>> GetBranListAsync();
         Task<BrandViewsModels> AddBrandAsync(BrandViewsModels addBrand);
         IEnumerable<Brand> Getbrand();
-        Task<BrandViewsModels> GetIdbrand(int? id);
-        Task<BrandViewsModels> EditBrand(int?id, BrandViewsModels editBrand);
+        Task<BrandViewsModels> GetIdbrandAsync(int id);
+        Task<BrandViewsModels> EditBrandAsync(int id, BrandViewsModels editBrand);
         bool IsExistedName(int id, string name);
         void Delete(int id);
 
@@ -63,14 +63,14 @@ namespace TaskUser.Service
             return addBrand;
         }
         //get brand
-        public async Task<BrandViewsModels>  GetIdbrand(int? id)
+        public async Task<BrandViewsModels> GetIdbrandAsync(int id)
         {
             var findBrand= await _context.Brands.FindAsync(id);
             var brandDtos = _mapper.Map<BrandViewsModels>(findBrand);
             return brandDtos;
         }
         //post edit band = try catch
-        public async Task<BrandViewsModels> EditBrand(int?id, BrandViewsModels editBrand)
+        public async Task<BrandViewsModels> EditBrandAsync(int id, BrandViewsModels editBrand)
         {
             try
             {

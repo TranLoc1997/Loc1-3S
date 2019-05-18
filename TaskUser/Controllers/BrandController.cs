@@ -67,13 +67,13 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>view edit </returns>
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int?id)
         {
             if (id==null)
             {
                 return BadRequest();
             }
-            var getBrand = await _brandService.GetIdbrand(id.Value);
+            var getBrand = await _brandService.GetIdbrandAsync(id.Value);
            
             return View(getBrand);
         }
@@ -84,7 +84,7 @@ namespace TaskUser.Controllers
         /// <param name="editBrand"></param>
         /// <returns>index brand</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int id ,BrandViewsModels editBrand)
+        public async Task<IActionResult> Edit(int ?id ,BrandViewsModels editBrand)
         {
            
             if (ModelState.IsValid)
@@ -92,11 +92,16 @@ namespace TaskUser.Controllers
                 if (id == editBrand.Id)
                 {
                     
-                    await _brandService.EditBrand(id,editBrand);
+                    await _brandService.EditBrandAsync(id.Value,editBrand);
                     TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
                     
-                }              
+                }
+                if (id == null)
+                {
+                    ViewData["EditFailure"] = _brandLocalizer.GetLocalizedString("err_EditFailure");
+                    return BadRequest();
+                }
             }
             ViewData["EditFailure"] = _brandLocalizer.GetLocalizedString("err_EditFailure");
             return View();

@@ -107,7 +107,7 @@ namespace TaskUser.Controllers
                 
                 return BadRequest();
             }
-            var findUser = await _userService.GetId(id.Value);
+            var findUser = await _userService.GetIdAsync(id.Value);
             if (findUser ==null)
             {
                 
@@ -130,7 +130,7 @@ namespace TaskUser.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userService.EditAsync(userParam);
+                await _userService.EditUserAsync(userParam);
                 TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                 return RedirectToAction("Index");
             }
@@ -144,9 +144,9 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>view _change Password</returns>
         [HttpGet]        
-        public async Task<IActionResult> EditPassword(int id)
+        public async Task<IActionResult> EditPassword(int ?id)
         {
-            var findPassword = await _userService.GetPassword(id);
+            var findPassword = await _userService.GetPasswordAsync(id.Value);
             if (findPassword == null)
             {
                 return BadRequest();
@@ -164,7 +164,7 @@ namespace TaskUser.Controllers
         { 
             if (ModelState.IsValid)
             {
-                var users =  await _userService.UserPassword(passwordUser);
+                var users =  await _userService.EditPasswordAsync(passwordUser);
                 if (users)
                 {
                     TempData["EditPasswordSuccessfuly"] = _localizer.GetLocalizedString("msg_EditPasswordSuccessfuly").ToString();

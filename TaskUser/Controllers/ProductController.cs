@@ -90,7 +90,7 @@ namespace TaskUser.Controllers
             }
             ViewBag.BrandId = new SelectList(_brandService.Getbrand(), "Id", "BrandName");  
             ViewBag.CategoryId = new SelectList(_categoryService.GetCategory(), "Id", "CategoryName");  
-            var getProduct = await _productService.GetIdProduct(id.Value);
+            var getProduct = await _productService.GetIdProductAsync(id.Value);
                    
             return View(getProduct);
         }
@@ -110,7 +110,7 @@ namespace TaskUser.Controllers
                 if (id == editProduct.Id)
                 {
                         
-                    await _productService.EditProduct(id,editProduct);
+                    await _productService.EditProductAsync(id,editProduct);
                     TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
                 }

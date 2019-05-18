@@ -79,7 +79,7 @@ namespace TaskUser.Controllers
             {
                 return BadRequest();
             }
-            var getstore =await _storeService.GetIdStore(id.Value);
+            var getstore =await _storeService.GetIdStoreAsync(id.Value);
            
             return View(getstore);
         }
@@ -91,7 +91,7 @@ namespace TaskUser.Controllers
         /// <returns>index of store else view</returns>
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id ,StoreViewModels editStore)
+        public async Task<IActionResult> Edit(int ?id ,StoreViewModels editStore)
         {
            
             if (ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace TaskUser.Controllers
                 if (id == editStore.Id)
                 {
                         
-                    await _storeService.EditStore(id,editStore);
+                    await _storeService.EditStoreAsync(id.Value,editStore);
                     TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
                 }

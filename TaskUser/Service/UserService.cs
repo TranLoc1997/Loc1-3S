@@ -17,13 +17,13 @@ namespace TaskUser.Service
         bool Login(string email, string password);
         Task<List<UserViewsModels>> GetUserListAsync();
         Task<UserViewsModels> AddUserAsync(UserViewsModels user);
-        Task<EditViewPassword> GetPassword(int? id);
+        Task<EditViewPassword> GetPasswordAsync(int id);
         IEnumerable<User> GetUser();
-        Task<EditUserViewsModels> GetId(int? id);
-        Task<EditUserViewsModels> EditAsync(EditUserViewsModels userParam);
+        Task<EditUserViewsModels> GetIdAsync(int id);
+        Task<EditUserViewsModels> EditUserAsync(EditUserViewsModels userParam);
         User GetName(string name);
         void Delete(int id);
-        Task<bool> UserPassword(EditViewPassword passUser);
+        Task<bool> EditPasswordAsync(EditViewPassword passUser);
         bool IsExistedEmailUser(int id, string email);
 
     }
@@ -96,7 +96,7 @@ namespace TaskUser.Service
         }
         
         //get edit id      
-        public async Task<EditUserViewsModels> GetId(int? id)
+        public async Task<EditUserViewsModels> GetIdAsync(int id)
         {
             var findUser=await _context.Users.FindAsync(id);
             var userDtos = _mapper.Map<EditUserViewsModels>(findUser);
@@ -108,7 +108,7 @@ namespace TaskUser.Service
 
         //post edit id   
 
-        public async Task<EditUserViewsModels> EditAsync(EditUserViewsModels userParam)
+        public async Task<EditUserViewsModels> EditUserAsync(EditUserViewsModels userParam)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace TaskUser.Service
 
         }
         //get password
-        public async Task<EditViewPassword> GetPassword(int? id)
+        public async Task<EditViewPassword> GetPasswordAsync(int id)
         {
             var findPassWord= await _context.Users.FindAsync(id);
             var usereditDtos = _mapper.Map<EditViewPassword>(findPassWord);           
@@ -140,7 +140,7 @@ namespace TaskUser.Service
         }
         
         //post user Password
-        public async Task<bool> UserPassword(EditViewPassword passUser)
+        public async Task<bool> EditPasswordAsync(EditViewPassword passUser)
         {
             try
             {

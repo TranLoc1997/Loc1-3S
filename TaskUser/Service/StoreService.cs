@@ -15,8 +15,8 @@ namespace TaskUser.Service
         Task<List<StoreViewModels>> GetStoreListAsync();
         IEnumerable<Store> GetStore();
         Task<StoreViewModels> AddStoreAsync(StoreViewModels addStore);
-        Task<StoreViewModels> GetIdStore(int? id); //
-        Task<StoreViewModels> EditStore(int? id, StoreViewModels editStore);
+        Task<StoreViewModels> GetIdStoreAsync(int id); //
+        Task<StoreViewModels> EditStoreAsync(int id, StoreViewModels editStore);
         bool IsExistedEmailStore(int id, string email);
         void Delete(int id);
 
@@ -67,14 +67,14 @@ namespace TaskUser.Service
             return addStore;
         }  
         //get edit id store
-        public async Task<StoreViewModels> GetIdStore(int? id)
+        public async Task<StoreViewModels> GetIdStoreAsync(int id)
         {
             var findStore=await _context.Stores.FindAsync(id);
             var storeDtos = _mapper.Map<StoreViewModels>(findStore);
             return storeDtos;
         }
         // get edit store
-        public async Task<StoreViewModels> EditStore(int?id, StoreViewModels editStore)
+        public async Task<StoreViewModels> EditStoreAsync(int id, StoreViewModels editStore)
         {
             try
             {

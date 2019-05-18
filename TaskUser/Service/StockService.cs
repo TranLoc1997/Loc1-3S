@@ -19,9 +19,9 @@ namespace TaskUser.Service
 
         IEnumerable<Stock> GetStock();
         
-        Task<StockViewModels> GetIdStock(int? productId , int? storeId);
+        Task<StockViewModels> GetIdStockAsync(int productId , int storeId);
 
-        Task<StockViewModels> EditStock(int? productId , int? storeId, StockViewModels editStock);
+        Task<StockViewModels> EditStockAsync(int productId , int storeId, StockViewModels editStock);
 
         void Delete(int? productId, int? storeId);
 
@@ -81,7 +81,7 @@ namespace TaskUser.Service
 
         }
         //get id edit stock
-        public async Task<StockViewModels> GetIdStock(int? productId , int? storeId)
+        public async Task<StockViewModels> GetIdStockAsync(int productId , int storeId)
         {
             var findStock = await _context.Stocks.FindAsync(productId,storeId);
            
@@ -89,7 +89,7 @@ namespace TaskUser.Service
             return stockDtos;
         }
         // post edit stock
-        public async Task<StockViewModels> EditStock(int? productId , int? storeId, StockViewModels editStock)
+        public async Task<StockViewModels> EditStockAsync(int productId , int storeId, StockViewModels editStock)
         {
             try
             {

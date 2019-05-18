@@ -55,7 +55,7 @@ namespace TaskUser.Controllers
                 var addCategory = await _category.AddCategoryAsync(category);
                 if (addCategory != null)
                 {
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly");
+                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
                     return RedirectToAction("Index");
                 }
             }
@@ -74,7 +74,7 @@ namespace TaskUser.Controllers
             {
                 return NotFound();
             }
-            var getCategory = await _category.GetIdCategory(id.Value);
+            var getCategory = await _category.GetIdCategoryAsync(id.Value);
            
             return View(getCategory);
         }
@@ -85,18 +85,23 @@ namespace TaskUser.Controllers
 /// <param name="editCategory"></param>
 /// <returns>return index category</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int id ,CategoryViewsModels editCategory)
+        public async Task<IActionResult> Edit(int ?id ,CategoryViewsModels editCategory)
         {
            
             if (ModelState.IsValid)
                 if (id==editCategory.Id)
                 { 
                     
-                    await _category.EditCategory(id,editCategory);
-                    TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly");
+                    await _category.EditCategoryAsync(id.Value,editCategory);
+                    TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
                     
-                }       
+                }
+            if (id == null)
+            {
+                ViewData["EditFailure"] = _categoryLocalizer.GetLocalizedString("err_EditFailure");
+                return BadRequest();
+            }
             ViewData["EditFailure"] = _categoryLocalizer.GetLocalizedString("err_EditFailure");
             return View();
         }
@@ -111,7 +116,7 @@ namespace TaskUser.Controllers
             if (id!=null)
             {
                 _category.Delete(id.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly");
+                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
                 return RedirectToAction("Index");
             }
             ViewData["DeleteFailure"] = "err_Failure";

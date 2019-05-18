@@ -12287,11 +12287,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vanlo\\OneDrive\\Máy tính\\Loc-3S\\TaskUser\\TaskUser.csproj",
+      "projectUniqueName": "C:\\Users\\Vanlo\\OneDrive\\Máy tính\\Loc-3S\\Loc-3S\\TaskUser\\TaskUser.csproj",
       "projectName": "TaskUser",
-      "projectPath": "C:\\Users\\Vanlo\\OneDrive\\Máy tính\\Loc-3S\\TaskUser\\TaskUser.csproj",
+      "projectPath": "C:\\Users\\Vanlo\\OneDrive\\Máy tính\\Loc-3S\\Loc-3S\\TaskUser\\TaskUser.csproj",
       "packagesPath": "C:\\Users\\Vanlo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vanlo\\OneDrive\\Máy tính\\Loc-3S\\TaskUser\\obj\\",
+      "outputPath": "C:\\Users\\Vanlo\\OneDrive\\Máy tính\\Loc-3S\\Loc-3S\\TaskUser\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
