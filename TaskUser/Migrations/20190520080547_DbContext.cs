@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TaskUser.Migrations
 {
-    public partial class DbDatabase : Migration
+    public partial class DbContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,20 +72,31 @@ namespace TaskUser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stock",
+                name: "Product",
                 columns: table => new
                 {
-                    StoreId = table.Column<int>(maxLength: 255, nullable: false),
-                    ProductId = table.Column<int>(maxLength: 255, nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProductName = table.Column<string>(maxLength: 255, nullable: false),
+                    Picture = table.Column<string>(maxLength: 255, nullable: false),
+                    BrandId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
+                    ModelYear = table.Column<int>(nullable: false),
+                    ListPrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stock", x => new { x.ProductId, x.StoreId });
+                    table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stock_Store_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Store",
+                        name: "FK_Product_Brand_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brand",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Product_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -115,41 +126,28 @@ namespace TaskUser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Stock",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProductName = table.Column<string>(maxLength: 255, nullable: false),
-                    Picture = table.Column<string>(maxLength: 255, nullable: false),
-                    BrandId = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    ModelYear = table.Column<int>(nullable: false),
-                    ListPrice = table.Column<decimal>(nullable: false),
-                    StockProductId = table.Column<int>(nullable: true),
-                    StockStoreId = table.Column<int>(nullable: true)
+                    StoreId = table.Column<int>(maxLength: 255, nullable: false),
+                    ProductId = table.Column<int>(maxLength: 255, nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Stock", x => new { x.ProductId, x.StoreId });
                     table.ForeignKey(
-                        name: "FK_Product_Brand_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brand",
+                        name: "FK_Stock_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
+                        name: "FK_Stock_Store_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Store",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Product_Stock_StockProductId_StockStoreId",
-                        columns: x => new { x.StockProductId, x.StockStoreId },
-                        principalTable: "Stock",
-                        principalColumns: new[] { "ProductId", "StoreId" },
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -169,18 +167,18 @@ namespace TaskUser.Migrations
 
             migrationBuilder.InsertData(
                 table: "Product",
-                columns: new[] { "Id", "BrandId", "CategoryId", "ListPrice", "ModelYear", "Picture", "ProductName", "StockProductId", "StockStoreId" },
-                values: new object[] { 1, 1, 1, 123456m, 1, "", "Ao da so 1", null, null });
+                columns: new[] { "Id", "BrandId", "CategoryId", "ListPrice", "ModelYear", "Picture", "ProductName" },
+                values: new object[] { 1, 1, 1, 123456m, 1, "", "Ao da so 1" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Email", "IsActiver", "Name", "PassWord", "Phone", "StoreId" },
+                values: new object[] { 1, "Vanloc@gmail.com", true, "Loc", "20:WnwsYw512F795ULX8Bmi5P55ABLn+JDMXQE=", "123456789", 1 });
 
             migrationBuilder.InsertData(
                 table: "Stock",
                 columns: new[] { "ProductId", "StoreId", "Quantity" },
                 values: new object[] { 1, 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "User",
-                columns: new[] { "Id", "Email", "IsActiver", "Name", "PassWord", "Phone", "StoreId" },
-                values: new object[] { 1, "Vanloc@gmail.com", true, "Loc", "20:hCS5czCImBfs1PatGL5tcnsgtBcZq6KKQ5s=", "123456789", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_BrandId",
@@ -191,11 +189,6 @@ namespace TaskUser.Migrations
                 name: "IX_Product_CategoryId",
                 table: "Product",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Product_StockProductId_StockStoreId",
-                table: "Product",
-                columns: new[] { "StockProductId", "StockStoreId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_StoreId",
@@ -214,22 +207,22 @@ namespace TaskUser.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Stock");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Product");
+
+            migrationBuilder.DropTable(
+                name: "Store");
 
             migrationBuilder.DropTable(
                 name: "Brand");
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Stock");
-
-            migrationBuilder.DropTable(
-                name: "Store");
         }
     }
 }

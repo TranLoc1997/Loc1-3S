@@ -21,8 +21,8 @@
         <e p="ActionFilter.cs" t="Include" />
       </e>
       <e p="Migrations" t="Include">
-        <e p="20190502082232_DbDatabase.Designer.cs" t="Include" />
-        <e p="20190502082232_DbDatabase.cs" t="Include" />
+        <e p="20190520080547_DbContext.Designer.cs" t="Include" />
+        <e p="20190520080547_DbContext.cs" t="Include" />
         <e p="DataContextModelSnapshot.cs" t="Include" />
       </e>
       <e p="Models" t="Include">
