@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using TaskUser.Resources;
 using TaskUser.Service;
-using TaskUser.ViewsModels;
 using TaskUser.ViewsModels.User;
 
 namespace TaskUser.Validator
@@ -9,8 +8,7 @@ namespace TaskUser.Validator
     public class LoginValidator : AbstractValidator<LoginViewModel>
     {
 
-        public  LoginValidator(IUserService userService, SharedViewLocalizer<LoginValidatorResource> localizer){
-
+        public  LoginValidator(IUserService userService, SharedViewLocalizer<UserResource> localizer){
             RuleFor(x => x.Email).Length(1, 100).WithMessage(localizer.GetLocalizedString("msg_LengthFrom1To100Characters"));
             RuleFor(x => x.Email).EmailAddress().NotNull().WithMessage(localizer.GetLocalizedString("msg_NotEmpty") );
             RuleFor(x => x.Email).EmailAddress().WithMessage(localizer.GetLocalizedString("msg_EmailIsNotAvalidEmailAddress"));

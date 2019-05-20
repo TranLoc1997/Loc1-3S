@@ -165,4 +165,20 @@
   <data name="err_EditFailure" xml:space="preserve">
     <value>Edit Failure !</value>
   </data>
+  <data name="msg_LengthFrom1To100Characters">
+    <value>
+      Length From 1 To 100 Characters</value>
+  </data>
+  <data name="msg_EmailIsNotAvalidEmailAddress">
+    <value>
+      'Email' Is Not Avalid Email Address</value>
+  </data>
+  <data name="msg_NotEmpty">
+    <value>
+      Not Empty</value>
+  </data>
+  <data name="msg_EmailAlreadyExists">
+    <value>
+      Email Already Exists</value>
+  </data>
 </root>

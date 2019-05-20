@@ -9,7 +9,7 @@ namespace TaskUser.Validator
     {
      
 
-        public  StoreValidator(IStoreService storeService,IUserService userService,SharedViewLocalizer<StoreValidatorResource> localizer)
+        public  StoreValidator(IStoreService storeService,IUserService userService,SharedViewLocalizer<StoreResource> localizer)
         {
             RuleFor(x => x.Email).Must((reg, c) => !storeService.IsExistedEmailStore(reg.Id, reg.Email))
                 .WithMessage(localizer.GetLocalizedString("msg_EmailAlreadyExists"));

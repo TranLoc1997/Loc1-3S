@@ -147,4 +147,14 @@
   <data name="err_EditFailure" xml:space="preserve">
     <value>Sửa Thất Bại !</value>
   </data>
+  <data name="msg_NameCategoryAlreadyExists">
+    <value>
+      Tên Danh Mục Đã Tồn Tại
+    </value>
+  </data>
+  <data name="msg_NotEmpty">
+    <value>
+      Không Được Bõ Trống
+    </value>
+  </data>
 </root>

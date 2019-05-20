@@ -36,4 +36,31 @@
     <data name="btn_Login">
         <value>Đăng Nhập</value>
     </data>
+    <data name="msg_LengthFrom1To100Characters">
+        <value>
+            Độ dài từ 1 đến 100 ký tự</value>
+    </data>
+    <data name="msg_EmailIsNotAvalidEmailAddress">
+        <value>
+            Email không phải là địa chỉ email hợp lệ</value>
+    </data>
+    <data name="msg_NotEmpty">
+        <value>
+            Không được bõ trống</value>
+    </data>
+    <data name="msg_MinimumLengthOf6Characters">
+        <value>
+            Mật Khẩu tối thiểu 6 ký tự !
+        </value>
+    </data>
+    <data name="msg_PasswordMustContainBothLetterSandNumbers.">
+        <value>
+            Mật Khẩu Bắt Buộc Phải Có Chữ Và Số !
+        </value>
+    </data>
+    <data name="msg_EmailAlreadyExists">
+        <value>
+            Email đã tồn tại
+        </value>
+    </data>
 </root>

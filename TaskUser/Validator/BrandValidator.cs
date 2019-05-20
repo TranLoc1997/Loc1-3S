@@ -7,7 +7,7 @@ namespace TaskUser.Validator
 {
     public class BrandValidator:AbstractValidator<BrandViewsModels>
     {
-        public BrandValidator(SharedViewLocalizer<BrandValidatorResource> localizer ,IBrandService  brandService)
+        public BrandValidator(SharedViewLocalizer<BrandResource> localizer ,IBrandService  brandService)
         {
 
             RuleFor(x => x.BrandName).Must((reg, c) => !brandService.IsExistedName(reg.Id, reg.BrandName))

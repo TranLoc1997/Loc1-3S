@@ -10,7 +10,7 @@ namespace TaskUser.Validator
         public class StockValidator:AbstractValidator<StockViewModels>
         {
        
-            public  StockValidator(IStockService stockService, SharedViewLocalizer<StockValidatorResource> localizer)
+            public  StockValidator(IStockService stockService, SharedViewLocalizer<StockResource> localizer)
             {
                 RuleFor(x => x.Quantity).GreaterThanOrEqualTo(1).WithMessage(localizer.GetLocalizedString("msg_NumberMustBeGreaterThanOrEqualToOne"));
                 RuleFor(x => x.Quantity).NotNull().WithMessage(localizer.GetLocalizedString("msg_NotEmpty"));

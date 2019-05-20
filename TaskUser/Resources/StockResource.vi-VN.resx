@@ -153,4 +153,10 @@
   <data name="err_EditFailure" xml:space="preserve">
     <value>Sửa Thất Bại !</value>
   </data>
+  <data name="msg_NotEmpty">
+    <value>Không được bỏ trống</value>
+  </data>
+  <data name="msg_NumberMustBeGreaterThanOrEqualToOne">
+    <value>Số Lượng phải lớn 1 hoặc bằng 1</value>
+  </data>
 </root>

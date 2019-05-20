@@ -34,18 +34,4 @@ namespace TaskUser.Resources
     public class UserResource{}
     public class PasswordResource{}
  
-    
-    public class StockValidatorResource {}
-    public class StoreValidatorResource {}
-    public class CategoryValidatorResource{}
-    public class UsersValidatorResource{}
-    public class LoginValidatorResource{}
-    public class PasswordValidatorResource{}
-    public class ProductValidatorResource{ }
-    public class BrandValidatorResource
-    {
-            
-
-    }
-    
 }

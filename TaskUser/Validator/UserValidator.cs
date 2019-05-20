@@ -7,7 +7,7 @@ namespace TaskUser.Validator
 {
     public class UserValidator:AbstractValidator<UserViewsModels>
     {
-        public  UserValidator(IUserService userService, SharedViewLocalizer<UsersValidatorResource> localizer){
+        public  UserValidator(IUserService userService, SharedViewLocalizer<UserResource> localizer){
             
             RuleFor(x => x.Email).Must((reg, c) => !userService.IsExistedEmailUser(reg.Id, reg.Email))
                 .WithMessage(localizer.GetLocalizedString("msg_EmailAlreadyExists"));

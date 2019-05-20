@@ -153,4 +153,10 @@
   <data name="err_EditFailure" xml:space="preserve">
     <value>Edit Failure !</value>
   </data>
+  <data name="msg_NotEmpty">
+    <value>not be empty</value>
+  </data>
+  <data name="msg_NumberMustBeGreaterThanOrEqualToOne">
+    <value>Number Must Be Greater Than Or Equal To One</value>
+  </data>
 </root>

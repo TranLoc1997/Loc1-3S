@@ -162,4 +162,8 @@
   <data name="err_EditFailure" xml:space="preserve">
     <value>Sửa Thất Bại !</value>
   </data>
+  <data name="msg_NotEmpty">
+    <value>
+      Không được bõ trống</value>
+  </data>
 </root>

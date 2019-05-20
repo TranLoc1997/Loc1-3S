@@ -8,7 +8,7 @@ namespace TaskUser.Validator
 {
     public class PasswordValidator : AbstractValidator<EditViewPassword>
     {
-        public  PasswordValidator(IUserService userService,SharedViewLocalizer<PasswordValidatorResource> localizer)
+        public  PasswordValidator(IUserService userService,SharedViewLocalizer<PasswordResource> localizer)
         {
             RuleFor(x => x.NewPassword).NotNull().WithMessage(localizer.GetLocalizedString("msg_NotEmpty"));
             RuleFor(x => x.NewPassword).MinimumLength(6).WithMessage(localizer.GetLocalizedString("msg_MinimumLengthOf6Characters"));

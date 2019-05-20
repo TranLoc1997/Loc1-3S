@@ -162,4 +162,9 @@
   <data name="err_EditFailure" xml:space="preserve">
     <value>Edit Failure !</value>
   </data>
+  <data name="msg_NotEmpty">
+    <value>
+      Not Empty
+    </value>
+  </data>
 </root>
