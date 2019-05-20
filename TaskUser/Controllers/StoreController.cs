@@ -60,7 +60,7 @@ namespace TaskUser.Controllers
                 var addStore = await _storeService.AddStoreAsync(store);
                 if (addStore != null)
                 {
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_Successfuly").ToString();
+                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
                     return RedirectToAction("Index", addStore);
                 }
             }
