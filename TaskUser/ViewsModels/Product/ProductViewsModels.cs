@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using TaskUser.Models.Production;
 
-namespace TaskUser.ViewsModels.ProductViewsModels
+namespace TaskUser.ViewsModels.Product
 {
     public class ProductViewsModels
     {
@@ -20,8 +20,8 @@ namespace TaskUser.ViewsModels.ProductViewsModels
         public string Picture { get; set; }
         public IFormFile  PictureFile { get; set; }
         
-        public virtual Category Categorie { get; set; }
-        public virtual ICollection<Stock>Stocks { get; set; }
-        public virtual Brand Brand { get; set; }
+        public virtual Models.Production.Category Categorie { get; set; }
+        public virtual ICollection<Models.Production.Stock>Stocks { get; set; }
+        public virtual Models.Production.Brand Brand { get; set; }
     }
 }

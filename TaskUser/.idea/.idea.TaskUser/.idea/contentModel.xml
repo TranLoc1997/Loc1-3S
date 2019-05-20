@@ -195,31 +195,26 @@
         <e p="_ViewStart.cshtml" t="Include" />
       </e>
       <e p="ViewsModels" t="Include">
-        <e p="BrandViewsModels" t="Include">
-          <e p="BrandProfile.cs" t="Include" />
+        <e p="Brand" t="Include">
           <e p="BrandViewsModels.cs" t="Include" />
         </e>
-        <e p="CategoryViewsModels" t="Include">
-          <e p="CategoryProfile.cs" t="Include" />
+        <e p="Category" t="Include">
           <e p="CategoryViewsModels.cs" t="Include" />
         </e>
-        <e p="ProductViewsModels" t="Include">
-          <e p="ProductProfile.cs" t="Include" />
+        <e p="MapProfile.cs" t="Include" />
+        <e p="Product" t="Include">
           <e p="ProductViewsModels.cs" t="Include" />
         </e>
-        <e p="StockViewsModels" t="Include">
-          <e p="StockProfile.cs" t="Include" />
+        <e p="Stock" t="Include">
           <e p="StockViewModels.cs" t="Include" />
         </e>
-        <e p="StoreViewsModels" t="Include">
-          <e p="StoreProfile.cs" t="Include" />
+        <e p="Store" t="Include">
           <e p="StoreViewModels.cs" t="Include" />
         </e>
-        <e p="UserViewsModels" t="Include">
+        <e p="User" t="Include">
           <e p="EditUserViewsModels.cs" t="Include" />
           <e p="EditViewPassword.cs" t="Include" />
           <e p="LoginViewModel.cs" t="Include" />
-          <e p="UserProfile.cs" t="Include" />
           <e p="UserViewsModels.cs" t="Include" />
         </e>
       </e>

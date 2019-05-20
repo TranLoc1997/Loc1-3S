@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TaskUser.Models;
 using TaskUser.Models.Production;
-using TaskUser.ViewsModels.StockViewsModels;
+using TaskUser.ViewsModels.Stock;
 
 namespace TaskUser.Service
 {

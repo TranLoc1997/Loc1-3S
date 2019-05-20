@@ -2,7 +2,6 @@
 using TaskUser.Encryption;
 using TaskUser.Models.Production;
 using TaskUser.Models.Sales;
-using TaskUser.ViewsModels.StoreViewsModels;
 
 namespace TaskUser.Models
 {

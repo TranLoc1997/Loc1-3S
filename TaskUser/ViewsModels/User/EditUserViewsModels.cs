@@ -1,4 +1,4 @@
-﻿namespace TaskUser.ViewsModels.UserViewsModels
+﻿namespace TaskUser.ViewsModels.User
 {
     public class EditUserViewsModels
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using TaskUser.Resources;
 using TaskUser.Service;
-using TaskUser.ViewsModels.CategoryViewsModels;
+using TaskUser.ViewsModels.Category;
 
 namespace TaskUser.Validator
 {

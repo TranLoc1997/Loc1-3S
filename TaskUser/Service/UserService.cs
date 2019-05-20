@@ -8,7 +8,7 @@ using TaskUser.Encryption;
 using TaskUser.Models;
 using TaskUser.Models.Sales;
 using TaskUser.ViewsModels;
-using TaskUser.ViewsModels.UserViewsModels;
+using TaskUser.ViewsModels.User;
 
 namespace TaskUser.Service
 {

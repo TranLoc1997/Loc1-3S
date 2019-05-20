@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TaskUser.Filters;
 using TaskUser.Resources;
 using TaskUser.Service;
-using TaskUser.ViewsModels.StoreViewsModels;
+using TaskUser.ViewsModels.Store;
 
 namespace TaskUser.Controllers
 {

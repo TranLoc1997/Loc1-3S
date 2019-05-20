@@ -5,7 +5,7 @@ using TaskUser.Filters;
 using TaskUser.Resources;
 using TaskUser.ViewsModels;
 using TaskUser.Service;
-using TaskUser.ViewsModels.UserViewsModels;
+using TaskUser.ViewsModels.User;
 
 namespace TaskUser.Controllers
 {

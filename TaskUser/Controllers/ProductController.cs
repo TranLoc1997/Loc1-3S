@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using TaskUser.Filters;
 using TaskUser.Resources;
 using TaskUser.Service;
-using TaskUser.ViewsModels.ProductViewsModels;
+using TaskUser.ViewsModels.Product;
 
 namespace TaskUser.Controllers
 {

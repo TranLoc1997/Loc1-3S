@@ -1,4 +1,4 @@
-﻿namespace TaskUser.ViewsModels
+﻿namespace TaskUser.ViewsModels.User
 {
     public class LoginViewModel
     {

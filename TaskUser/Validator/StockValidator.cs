@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Localization;
 using TaskUser.Resources;
 using TaskUser.Service;
-using TaskUser.ViewsModels.StockViewsModels;
+using TaskUser.ViewsModels.Stock;
 
 namespace TaskUser.Validator
 {

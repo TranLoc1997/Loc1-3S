@@ -1,6 +1,4 @@
-﻿using TaskUser.Models;
-
-namespace TaskUser.ViewsModels
+﻿namespace TaskUser.ViewsModels.User
 {
     public class EditViewPassword
     {
