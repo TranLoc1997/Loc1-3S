@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_CategoryManagement" xml:space="preserve">
+  <data name="lbl_CategoryManage" xml:space="preserve">
     <value>Quản Lý Danh Mục</value>
   </data>
   <data name="lbl_CategoryName" xml:space="preserve">

@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_CategoryManagement" xml:space="preserve">
-    <value>Category Management</value>
+  <data name="lbl_CategoryManage" xml:space="preserve">
+    <value>Category Manage</value>
   </data>
   <data name="lbl_CategoryName" xml:space="preserve">
     <value>Category Name</value>

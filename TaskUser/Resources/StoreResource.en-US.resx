@@ -153,8 +153,8 @@
   <data name="lbl_manipulation" xml:space="preserve">
     <value>Manipulation</value>
   </data>
-  <data name="lbl_StoreManagement" xml:space="preserve">
-    <value>Store Management</value>
+  <data name="lbl_StoreManage" xml:space="preserve">
+    <value>Store Manage</value>
   </data>
   <data name="btn_AreYouSureYouWantToDeleteIt?" xml:space="preserve">
     <value>Are You Sure You Want To Delete It ?</value>

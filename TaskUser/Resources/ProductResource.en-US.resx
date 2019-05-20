@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_ProductManagement" xml:space="preserve">
-    <value>Product Management</value>
+  <data name="lbl_ProductManage" xml:space="preserve">
+    <value>Product Manage</value>
   </data>
   <data name="lbl_ProductName" xml:space="preserve">
     <value>Product Name</value>

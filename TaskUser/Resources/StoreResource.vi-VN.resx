@@ -153,7 +153,7 @@
   <data name="lbl_manipulation" xml:space="preserve">
     <value>Thao tác</value>
   </data>
-  <data name="lbl_StoreManagement" xml:space="preserve">
+  <data name="lbl_StoreManage" xml:space="preserve">
     <value>Quản Lý Cửa Hàng</value>
   </data>
   <data name="btn_AreYouSureYouWantToDeleteIt?" xml:space="preserve">

@@ -55,6 +55,11 @@
         
         
     </data>
+    <data name="msg_DeleteSuccessfuly">
+        <value>
+            Delete Successfuly
+        </value>
+    </data>
     <data name="btn_Edit">
         <value>Edit</value>
     </data>

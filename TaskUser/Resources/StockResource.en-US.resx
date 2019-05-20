@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_StockManagement" xml:space="preserve">
-    <value>Stock Management</value>
+  <data name="lbl_StockManage" xml:space="preserve">
+    <value>Stock Manage</value>
   </data>
   <data name="lbl_AddStock" xml:space="preserve">
     <value>Add Stock</value>
