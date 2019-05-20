@@ -608,6 +608,7 @@ C:/Users/Vanlo/OneDrive/Máy tính/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Category/Create.g.cshtml.cs
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Category/Edit.g.cshtml.cs
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Category/Index.g.cshtml.cs
+/home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Error/Error401.g.cshtml.cs
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Home/Index.g.cshtml.cs
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Home/Privacy.g.cshtml.cs
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Login/IndexLogin.g.cshtml.cs
@@ -640,4 +641,3 @@ C:/Users/Vanlo/OneDrive/Máy tính/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/TaskUser.dll
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/TaskUser.pdb
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/TaskUser.csproj.CopyComplete
-/home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Error/Error401.g.cshtml.cs

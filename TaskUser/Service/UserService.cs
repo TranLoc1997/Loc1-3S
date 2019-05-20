@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using TaskUser.Encryption;
 using TaskUser.Models;
 using TaskUser.Models.Sales;
-using TaskUser.ViewsModels;
 using TaskUser.ViewsModels.User;
 
 namespace TaskUser.Service
@@ -146,7 +145,7 @@ namespace TaskUser.Service
         {
             try
             {
-                var user = await _context.Users.FindAsync(passUser);
+                var user = await _context.Users.FindAsync(passUser.Id);
                 user.PassWord = SecurePasswordHasher.Hash(passUser.NewPassword);
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();

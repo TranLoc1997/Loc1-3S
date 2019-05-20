@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-@using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 <head>
@@ -58,9 +57,10 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
                 </div>
             }
+           
             @if (TempData["EditPasswordSuccessfuly"] != null)
             {
-                <div class="alert alert-info" style="width: 200px">
+                <div class="alert alert-info" style="width: 280px">
                     <strong>@TempData["EditPasswordSuccessfuly"]</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
                 </div>

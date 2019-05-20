@@ -60,6 +60,16 @@
             Delete Successfuly
         </value>
     </data>
+    <data name="msg_AddSuccessfuly">
+        <value>
+            Add Successfuly
+        </value>
+    </data>
+    <data name="msg_EditSuccessfuly">
+        <value>
+            Edit Successfuly
+        </value>
+    </data>
     <data name="btn_Edit">
         <value>Edit</value>
     </data>

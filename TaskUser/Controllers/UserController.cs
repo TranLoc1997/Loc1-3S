@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TaskUser.Filters;
 using TaskUser.Resources;
-using TaskUser.ViewsModels;
 using TaskUser.Service;
 using TaskUser.ViewsModels.User;
 
@@ -138,22 +137,23 @@ namespace TaskUser.Controllers
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName",userParam.StoreId);
             return View(userParam);
         }
+
         /// <summary>
         /// get edit password 
         /// </summary>
         /// <param name="id"></param>
         /// <returns>view _change Password</returns>
-        [HttpGet]        
-        public async Task<IActionResult> EditPassword(int ?id)
+        [HttpGet]
+        public async Task<IActionResult> EditPassword(int? id)
         {
+            if (id == null) return BadRequest();
             var findPassword = await _userService.GetPasswordAsync(id.Value);
-            if (findPassword == null)
-            {
-                return BadRequest();
-            }
 
-            return PartialView("_ChangePassword",findPassword);
+
+            return PartialView("_ChangePassword", findPassword);
+
         }
+
         /// <summary>
         /// post edit password
         /// </summary>
@@ -167,7 +167,8 @@ namespace TaskUser.Controllers
                 var users =  await _userService.EditPasswordAsync(passwordUser);
                 if (users)
                 {
-                    TempData["EditPasswordSuccessfuly"] = _localizer.GetLocalizedString("msg_EditPasswordSuccessfuly").ToString();
+                    TempData["EditPasswordSuccessfuly"] = _passwordLocalizer.GetLocalizedString("msg_EditPasswordSuccessfuly").ToString();
+                    return PartialView("_ChangePassword",passwordUser);    
                 }        
                 ViewData["EditPasswordFailure"] = "err_PasswordFailure";
                 return PartialView("_ChangePassword",passwordUser);       

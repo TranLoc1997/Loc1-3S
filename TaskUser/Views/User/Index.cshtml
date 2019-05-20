@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
-@using TaskUser.ViewsModels.User
 @model List<TaskUser.ViewsModels.User.UserViewsModels>
 
 
@@ -61,7 +60,7 @@
 
         @foreach (var item in Model)
         {
-            <tr align="center">
+            <tr  align="center">
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>

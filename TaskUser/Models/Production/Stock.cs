@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TaskUser.Models.Sales;
+﻿using TaskUser.Models.Sales;
 
 namespace TaskUser.Models.Production
 {

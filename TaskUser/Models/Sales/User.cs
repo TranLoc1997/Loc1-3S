@@ -12,7 +12,6 @@
         public bool IsActiver { get; set;}
         
         public virtual Store Store { get; set; }
-       
         
     }
 }

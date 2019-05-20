@@ -88,15 +88,14 @@ namespace TaskUser.Controllers
         [HttpGet]
         public  async Task<IActionResult> Edit(int?  productId,int?storeId)
         {
-            if (productId==null && storeId==null)
-            {
-                return BadRequest();
-            }
+            if (productId == null || storeId == null) return View();
+            var getStock = await _stockService.GetIdStockAsync(productId.Value, storeId.Value);
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName");
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
-            var getStock = await _stockService.GetIdStockAsync(productId.Value, storeId.Value);
            
             return View(getStock);
+
+
         }
         /// <summary>
         /// get edit stock
