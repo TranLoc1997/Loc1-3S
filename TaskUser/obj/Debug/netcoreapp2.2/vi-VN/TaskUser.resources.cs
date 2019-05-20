@@ -14,4 +14,4 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyProductAttribute("TaskUser")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskUser")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyCultureAttribute("vi-vn")]
+[assembly: System.Reflection.AssemblyCultureAttribute("vi-VN")]

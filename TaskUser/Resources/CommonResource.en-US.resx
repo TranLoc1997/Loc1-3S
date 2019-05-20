@@ -38,6 +38,11 @@
             User
         </value>
     </data>
+    <data name="btn_Management">
+        <value>
+            Management
+        </value>
+    </data>
     <data name="btn_Brand">
         <value>
             Brand

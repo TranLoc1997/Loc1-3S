@@ -10,19 +10,19 @@
 </head>
 <body>
 
-<a class="nav-link" data-toggle="collapse" href="#language" aria-expanded="false" aria-controls="language">
-  <i class="mdi mdi-web menu-icon"></i>
-  @* <span class="menu-title">@Localizer["Language"]</span>  *@
-  <i class="menu-arrow"></i>
-</a>
-<div class="collapse" id="language">
-  <ul class="nav flex-column sub-menu">
-    @* <li class="nav-item">  *@
-    @*   @await Html.PartialAsync("../User/SelectLanguagePartial") *@
-    @* </li>  *@
- 
-  </ul>
-</div>
+@* <a class="nav-link" data-toggle="collapse" href="#language" aria-expanded="false" aria-controls="language"> *@
+@*   <i class="mdi mdi-web menu-icon"></i> *@
+@*   $1$ <span class="menu-title">@Localizer["Language"]</span>  #1# *@
+@*   <i class="menu-arrow"></i> *@
+@* </a> *@
+@* <div class="collapse" id="language"> *@
+@*   <ul class="nav flex-column sub-menu"> *@
+@*     $1$ <li class="nav-item">  #1# *@
+@*     $1$   @await Html.PartialAsync("../User/SelectLanguagePartial") #1# *@
+@*     $1$ </li>  #1# *@
+@*   *@
+@*   </ul> *@
+@* </div> *@
 
 @RenderBody()
 

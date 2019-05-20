@@ -158,6 +158,24 @@ namespace TaskUser
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
             #endregion
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (!context.Response.HasStarted && context.Response.StatusCode != StatusCodes.Status200OK)
+                {
+//                    if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+//                    {
+//                        context.Request.Path = "/Error/404";
+//                        await next();
+//                    }
+
+                     if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
+                    {
+                        context.Request.Path = "/Error/401";
+                        await next();
+                    }
+                } 
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

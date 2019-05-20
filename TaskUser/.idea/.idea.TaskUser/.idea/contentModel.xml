@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$USER_HOME$/.Rider2018.1/system/resharper-host/local/Transient/ReSharperHost/v12/SolutionCaches/_TaskUser.1930168123.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.Rider2018.1/system/resharper-host/local/Transient/ReSharperHost/v12/SolutionCaches/_TaskUser.1858875778.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Controllers" t="Include">
         <e p="BrandController.cs" t="Include" />
         <e p="CategoryController.cs" t="Include" />
+        <e p="ErrorController.cs" t="Include" />
         <e p="HomeController.cs" t="Include" />
         <e p="LoginController.cs" t="Include" />
         <e p="ProductController.cs" t="Include" />
@@ -149,6 +150,9 @@
           <e p="Edit.cshtml" t="Include" />
           <e p="Index.cshtml" t="Include" />
         </e>
+        <e p="Error" t="Include">
+          <e p="Error401.cshtml" t="Include" />
+        </e>
         <e p="Home" t="Include">
           <e p="Index.cshtml" t="Include" />
           <e p="Privacy.cshtml" t="Include" />
@@ -232,6 +236,7 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="wwwroot" t="Include">
         <e p="css" t="Include">
+          <e p="401.css" t="Include" />
           <e p="Login.css" t="Include" />
           <e p="indexcs.css" t="Include" />
           <e p="main.css" t="Include" />
@@ -388,6 +393,8 @@
           <e p="logo.svg" t="Include" />
         </e>
         <e p="img" t="Include">
+          <e p="20180503_093814435_iOS.jpg" t="Include" />
+          <e p="20181201_035311805_iOS.jpg" t="Include" />
           <e p="2656-256.png" t="Include" />
           <e p="Brand.png" t="Include" />
           <e p="Edit.png" t="Include" />

@@ -48,6 +48,11 @@
             Kho Hàng
         </value>
     </data>
+    <data name="btn_Management">
+        <value>
+            Quản Lý
+        </value>
+    </data>
     <data name="msg_AddSuccessfuly">
         <value>
             Thêm Thành Công 
