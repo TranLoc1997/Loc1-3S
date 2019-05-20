@@ -1,4 +1,8 @@
-﻿namespace TaskUser.ViewsModels.StoreViewsModels
+﻿using System.Collections.Generic;
+using TaskUser.Models.Production;
+using TaskUser.Models.Sales;
+
+namespace TaskUser.ViewsModels.StoreViewsModels
 {
     public class StoreViewModels
     {
@@ -10,5 +14,8 @@
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
+        public virtual ICollection<User> users { get; set; }
+        
+        public virtual ICollection<Stock>Stocks { get; set; }
     }
 }

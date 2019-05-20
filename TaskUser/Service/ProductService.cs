@@ -36,7 +36,7 @@ namespace TaskUser.Service
         //show list product
         public async Task<List<ProductViewsModels>> GetProductListAsync()//
         {
-            var list = await _context.Products.ToListAsync();
+            var list = await _context.Products.Include(b=>b.Brand).Include(c=>c.Categorie).ToListAsync();
             var listProduct = _mapper.Map<List<ProductViewsModels>>(list);
             return listProduct;
         }

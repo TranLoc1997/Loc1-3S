@@ -1,4 +1,6 @@
-﻿namespace TaskUser.Models.Production
+﻿using System.Collections.Generic;
+
+namespace TaskUser.Models.Production
 {
     public class Product
     {
@@ -15,9 +17,9 @@
         
        public virtual Category Categorie { get; set; }
         
-       public virtual Stock Stock { get; set; }
+       
         
-//        public virtual ICollection<Stock>Stocks { get; set; }
+        public virtual ICollection<Stock>Stocks { get; set; }
         public virtual Brand Brand { get; set; }
         
     }

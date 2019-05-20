@@ -1,4 +1,6 @@
-﻿namespace TaskUser.ViewsModels.UserViewsModels
+﻿using TaskUser.Models.Sales;
+
+namespace TaskUser.ViewsModels.UserViewsModels
 {
     public class UserViewsModels
     {
@@ -9,5 +11,7 @@
         public string PassWord { get; set; }
         public string Phone { get; set; }
         public bool IsActiver { get; set;}
+        
+        public virtual Store Store { get; set; }
     }
 }

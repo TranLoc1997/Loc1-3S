@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using TaskUser.Models.Production;
 
 namespace TaskUser.ViewsModels.ProductViewsModels
 {
@@ -17,5 +19,9 @@ namespace TaskUser.ViewsModels.ProductViewsModels
         public decimal ListPrice { get; set; }
         public string Picture { get; set; }
         public IFormFile  PictureFile { get; set; }
+        
+        public virtual Category Categorie { get; set; }
+        public virtual ICollection<Stock>Stocks { get; set; }
+        public virtual Brand Brand { get; set; }
     }
 }

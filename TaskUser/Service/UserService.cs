@@ -65,7 +65,9 @@ namespace TaskUser.Service
 //get list show user
         public async Task<List<UserViewsModels>> GetUserListAsync()
         {
-            var list = await _context.Users.ToListAsync();
+            var list = await _context.Users
+                .Include(u=>u.Store).
+                ToListAsync();
             var listUser = _mapper.Map<List<UserViewsModels>>(list);
             return listUser;
             

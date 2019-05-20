@@ -38,7 +38,8 @@ namespace TaskUser.Service
        // get show store
         public async Task<List<StoreViewModels>> GetStoreListAsync()//
         {
-            var list = await _context.Stores.ToListAsync();
+            var list = await _context.Stores
+                .ToListAsync();
             var listStore = _mapper.Map<List<StoreViewModels>>(list);
             return listStore;
         }

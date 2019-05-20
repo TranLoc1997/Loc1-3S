@@ -8,7 +8,7 @@ namespace TaskUser.Models.Production
         public int Id { get; set; }
         public string CategoryName { get; set; }
         
-//        public virtual ICollection<Product>Products { get; set; }
+        public virtual ICollection<Product>Products { get; set; }
         
     }
 }

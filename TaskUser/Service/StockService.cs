@@ -40,7 +40,7 @@ namespace TaskUser.Service
        //get show list stock
         public async Task<List<StockViewModels>> GetStockListAsync()
         {
-            var list = await _context.Stocks.ToListAsync();
+            var list = await _context.Stocks.Include(s=>s.Store).Include(p=>p.Product).ToListAsync();
             var listStock = _mapper.Map<List<StockViewModels>>(list);
             return listStock;
         }
