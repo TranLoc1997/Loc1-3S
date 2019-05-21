@@ -10,7 +10,9 @@
    
     <form method="post" asp-controller="Stock" enctype="multipart/form-data" asp-action="Edit">
         <legend>@StockLocalizer.GetLocalizedString("lbl_EditStock")</legend>
-        @*<input type="hidden" class="form-control" asp-for="Id"  placeholder="Your name" required>*@
+        <input type="hidden" class="form-control" asp-for="ProductId">
+        <input type="hidden" class="form-control" asp-for="StoreId">
+
         <div class="form-group col-xs-6">
             <label>@StockLocalizer.GetLocalizedString("lbl_StoreId")</label>
             <select class="form-control" asp-for="StoreId" asp-items="@ViewBag.StoreId">

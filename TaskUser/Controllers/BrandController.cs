@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ReflectionIT.Mvc.Paging;
 using TaskUser.Filters;
 using TaskUser.Models;
 using TaskUser.Resources;
@@ -32,18 +29,13 @@ namespace TaskUser.Controllers
         /// show index brand
         /// </summary>
         /// <returns>viewbrand</returns>
-        public async Task<IActionResult> Index(int page =1)
+    
+        public async Task<IActionResult> Index()
         {
             var listBrand = await _brandService.GetBranListAsync();
             return View(listBrand);
 
         }
-//        public async Task<IActionResult> Index()
-//        {
-//            var listBrand = await _brandService.GetBranListAsync();
-//            return View(listBrand);
-//
-//        }
         
 
         
@@ -68,14 +60,15 @@ namespace TaskUser.Controllers
             if (ModelState.IsValid)
             {
                 var addBrand = await _brandService.AddBrandAsync(brand);
-                if (addBrand != null)
+                if (addBrand)
                 {
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
-                    return RedirectToAction("Index", addBrand);
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
+                    return RedirectToAction("Index");
                 }
+                TempData["EditFailure"] = _localizer.GetLocalizedString("err_AddFailure").ToString();
+                return View(brand);
             }
-            ViewData["AddFailure"] = _brandLocalizer.GetLocalizedString("err_AddFailure");
-            return View();
+            return View(brand);
         }
         
         /// <summary>
@@ -84,9 +77,9 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>view edit </returns>
         [HttpGet]
-        public async Task<IActionResult> Edit(int?id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (id==null)
+            if (id == null)
             {
                 return BadRequest();
             }
@@ -102,27 +95,21 @@ namespace TaskUser.Controllers
         /// <param name="editBrand"></param>
         /// <returns>index brand</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int ?id ,BrandViewsModels editBrand)
+        public async Task<IActionResult> Edit(BrandViewsModels editBrand)
         {
-           
             if (ModelState.IsValid)
             {
-                if (id == editBrand.Id)
+                var brand = await  _brandService.EditBrandAsync(editBrand);
+                if (brand)
                 {
-                    
-                    await _brandService.EditBrandAsync(id.Value,editBrand);
-                    TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
+                       TempData["Successfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
-                    
+                
                 }
-                if (id == null)
-                {
-                    ViewData["EditFailure"] = _brandLocalizer.GetLocalizedString("err_EditFailure");
-                    return BadRequest();
-                }
+                TempData["EditFailure"] = _localizer.GetLocalizedString("err_EditFailure").ToString();
+                return View(editBrand);
             }
-            ViewData["EditFailure"] = _brandLocalizer.GetLocalizedString("err_EditFailure");
-            return View();
+            return View(editBrand);
         }
         
         /// <summary>
@@ -131,17 +118,21 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>index brand</returns>
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id!=null)
+            if (id == null)
             {
-                _brandService.Delete(id.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                return BadRequest();
+            }
+            
+            var brand = await _brandService.Delete(id.Value);
+            if (brand)
+            {
+                TempData["Successfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
                 return RedirectToAction("Index");
             }
-            TempData["DeleteFailure"] = _localizer.GetLocalizedString("err_Failure");
+            TempData["EditFailure"] = _localizer.GetLocalizedString("err_Failure").ToString();
             return RedirectToAction("Index");
-            
         }
     }
 }

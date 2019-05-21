@@ -14,12 +14,12 @@ namespace TaskUser.Service
     public interface IBrandService
     {
         Task<List<BrandViewsModels>> GetBranListAsync();
-        Task<BrandViewsModels> AddBrandAsync(BrandViewsModels addBrand);
+        Task<bool> AddBrandAsync(BrandViewsModels addBrand);
         IEnumerable<Brand> Getbrand();
         Task<BrandViewsModels> GetIdbrandAsync(int id);
-        Task<BrandViewsModels> EditBrandAsync(int id, BrandViewsModels editBrand);
+        Task<bool> EditBrandAsync(BrandViewsModels editBrand);
         bool IsExistedName(int id, string name);
-        void Delete(int id);
+        Task<bool> Delete(int id);
 
     }
 
@@ -49,18 +49,26 @@ namespace TaskUser.Service
             return listBrand;
         }
         //create brand
-        public async Task<BrandViewsModels> AddBrandAsync(BrandViewsModels addBrand)
-        {            
-            var brand = new Brand()
+        public async Task<bool> AddBrandAsync(BrandViewsModels addBrand)
+        {
+            try
             {
-                BrandName = addBrand.BrandName
-                
-                    
-            };
+                var brand = new Brand()
+                {
+                    BrandName = addBrand.BrandName
+                };
             
-            _context.Brands.Add(brand);
-            await _context.SaveChangesAsync();
-            return addBrand;
+                _context.Brands.Add(brand);
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
         //get brand
         public async Task<BrandViewsModels> GetIdbrandAsync(int id)
@@ -70,26 +78,21 @@ namespace TaskUser.Service
             return brandDtos;
         }
         //post edit band = try catch
-        public async Task<BrandViewsModels> EditBrandAsync(int id, BrandViewsModels editBrand)
+        public async Task<bool> EditBrandAsync(BrandViewsModels editBrand)
         {
             try
             {
-                var brand =_context.Brands.Find(id);
-            
+                var brand =await _context.Brands.FindAsync(editBrand.Id);
                 brand.BrandName = editBrand.BrandName;
-            
                 _context.Brands.Update(brand);
                 await _context.SaveChangesAsync();
-                return editBrand;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
-
-           
-
         }
         //check dieu kien neu brandname == name 
         public bool IsExistedName(int id,string name)
@@ -97,13 +100,22 @@ namespace TaskUser.Service
             return _context.Brands.Any(x => x.BrandName == name && x.Id != id);
         }
         // delet brand
-        public void Delete(int id)
+        public async Task<bool>Delete(int id)
         {
-            var brand = _context.Brands.Find(id);
-            if (brand == null) 
-                return;
-            _context.Brands.Remove(brand);
-            _context.SaveChanges();
+            try
+            {
+                var brand = await _context.Brands.FindAsync(id);
+                _context.Brands.Remove(brand);
+                _context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
 //        
     }

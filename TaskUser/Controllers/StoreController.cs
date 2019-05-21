@@ -53,14 +53,16 @@ namespace TaskUser.Controllers
             if (ModelState.IsValid)
             {
                 var addStore = await _storeService.AddStoreAsync(store);
-                if (addStore != null)
+                if (addStore)
                 {
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
-                    return RedirectToAction("Index", addStore);
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
+                    return RedirectToAction("Index");
                 }
+                TempData["Failure"] = _localizer.GetLocalizedString("err_AddFailure").ToString();
+                return View(store);
             }
-            ViewData["AddFailure"] = _storeLocalizer.GetLocalizedString("err_AddFailure");
-            return View();
+            
+            return View(store);
         }
         
         /// <summary>
@@ -87,23 +89,22 @@ namespace TaskUser.Controllers
         /// <param name="editStore"></param>
         /// <returns>index of store else view</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int ?id ,StoreViewModels editStore)
+        public async Task<IActionResult> Edit(StoreViewModels editStore)
         {
            
             if (ModelState.IsValid)
             {
-                if (id == editStore.Id)
+                 var store= await _storeService.EditStoreAsync(editStore);
+                if (store)
                 {
-                        
-                    await _storeService.EditStoreAsync(id.Value,editStore);
-                    TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
+                    
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
                 }
-                ViewData["EditFailure"] = _storeLocalizer.GetLocalizedString("err_EditFailure");
-                return BadRequest();
-            }
-            ViewData["EditFailure"] = "err_Failure";
-            return View();
+                TempData["Failure"] = _localizer.GetLocalizedString("err_EditFailure").ToString();
+                return View(editStore);
+                }
+            return View(editStore);
         }
         
         /// <summary>
@@ -112,15 +113,19 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>index</returns>
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id!=null)
+            if (id==null)
             {
-                _storeService.Delete(id.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
-                return RedirectToAction("Index");
+                return BadRequest();
             }
-            ViewData["DeleteFailure"] = "err_Failure";
+           var rmStore=await _storeService.Delete(id.Value);
+            if (rmStore)
+            {
+                TempData["Successfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                return RedirectToAction("Index"); 
+            }
+            TempData["Failure"] = _localizer.GetLocalizedString("err_DeleteFailure").ToString();
             return RedirectToAction("Index");
             
         }

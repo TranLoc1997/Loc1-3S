@@ -146,7 +146,7 @@
   </data>
   <data name="msg_NameBrandAlreadyExists">
     <value>
-      Tên Kho Hàng  Đã Tồn Tại !
+      {0} Tên Kho Hàng  Đã Tồn Tại !
     </value>
   </data>
   <data name="msg_NotEmpty">

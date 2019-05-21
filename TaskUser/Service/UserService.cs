@@ -15,14 +15,15 @@ namespace TaskUser.Service
     {
         bool Login(string email, string password);
         Task<List<UserViewsModels>> GetUserListAsync();
-        Task<UserViewsModels> AddUserAsync(UserViewsModels user);
+        Task<bool> AddUserAsync(UserViewsModels user);
         Task<EditViewPassword> GetPasswordAsync(int id);
+        Task<bool> EditPasswordAsync(EditViewPassword passUser);
         IEnumerable<User> GetUser();
         Task<EditUserViewsModels> GetIdAsync(int id);
-        Task<EditUserViewsModels> EditUserAsync(EditUserViewsModels userParam);
+        Task<bool> EditUserAsync(EditUserViewsModels userParam);
         User GetName(string name);
-        void Delete(int id);
-        Task<bool> EditPasswordAsync(EditViewPassword passUser);
+        Task<bool> Delete(int id);
+        
         bool IsExistedEmailUser(int id, string email);
 
     }
@@ -77,23 +78,31 @@ namespace TaskUser.Service
             return _context.Users;
         } 
 //create user
-        public async Task<UserViewsModels> AddUserAsync(UserViewsModels user)
+        public async Task<bool> AddUserAsync(UserViewsModels user)
         {
-               
-            var users = new User()
+            try
             {
-                Name = user.Name,
-                Email = user.Email,
-                PassWord =SecurePasswordHasher.Hash(user.PassWord),
-                Phone = user.Phone,
-                StoreId = user.StoreId,
-                IsActiver = user.IsActiver
+                var users = new User()
+                {
+                    Name = user.Name,
+                    Email = user.Email,
+                    PassWord =SecurePasswordHasher.Hash(user.PassWord),
+                    Phone = user.Phone,
+                    StoreId = user.StoreId,
+                    IsActiver = user.IsActiver
                     
-            };
+                };
             
-            await _context.Users.AddAsync(users);
-            await _context.SaveChangesAsync();
-            return user;
+                await _context.Users.AddAsync(users);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }  
+           
         }
         
         //get edit id      
@@ -109,7 +118,7 @@ namespace TaskUser.Service
 
         //post edit id   
 
-        public async Task<EditUserViewsModels> EditUserAsync(EditUserViewsModels userParam)
+        public async Task<bool> EditUserAsync(EditUserViewsModels userParam)
         {
             try
             {
@@ -122,12 +131,12 @@ namespace TaskUser.Service
                 user.StoreId = userParam.StoreId;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
-                return userParam;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
             
 
@@ -160,13 +169,22 @@ namespace TaskUser.Service
         }
        
         // delete user
-        public void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var user = _context.Users.Find(id);
-            if (user == null) 
-                return;
-            _context.Users.Remove(user);
-            _context.SaveChanges();
+            try
+            {
+                var user = await _context.Users.FindAsync(id);
+                
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
         //ckeck name
         public User GetName(string email)

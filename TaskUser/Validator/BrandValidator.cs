@@ -11,7 +11,7 @@ namespace TaskUser.Validator
         {
 
             RuleFor(x => x.BrandName).Must((reg, c) => !brandService.IsExistedName(reg.Id, reg.BrandName))
-                .WithMessage(localizer.GetLocalizedString("msg_NameBrandAlreadyExists"));
+                .WithMessage((reg, c) => string.Format(localizer.GetLocalizedString("msg_NameBrandAlreadyExists"),c));
             RuleFor(x => x.BrandName).NotNull().WithMessage(localizer.GetLocalizedString("msg_NotEmpty"));  
 
 

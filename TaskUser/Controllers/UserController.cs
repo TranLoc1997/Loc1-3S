@@ -73,17 +73,21 @@ namespace TaskUser.Controllers
             if (ModelState.IsValid)
             {
                 var addUser = await _userService.AddUserAsync(user);
-                if (addUser != null)
+                if (addUser)
                 {
                     
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
-                    return RedirectToAction("Index", addUser);
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
+                    return RedirectToAction("Index");
                 }
+                TempData["Failure"] = _localizer.GetLocalizedString("err_AddFailure").ToString();
+                ViewBag.StoreId = new SelectList(_storeService.GetStore(), 
+                    "Id", "StoreName",user.StoreId);
+                return View(user);
+                
             }
-            ViewData["AddFailure"] =_userLocalizer.GetLocalizedString("err_AddFailure");
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), 
                 "Id", "StoreName",user.StoreId);
-            return View();
+            return View(user);
         }
         
         /// <summary>
@@ -121,11 +125,16 @@ namespace TaskUser.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userService.EditUserAsync(userParam);
-                TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
-                return RedirectToAction("Index");
+                var user = await _userService.EditUserAsync(userParam);
+                if (user)
+                {
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
+                    return RedirectToAction("Index");
+                }
+                TempData["Failure"] = _localizer.GetLocalizedString("err_EditFailure").ToString();
+                return View(userParam);
+
             }
-            ViewData["EditFailure"] = _userLocalizer.GetLocalizedString("err_EditFailure");
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName",userParam.StoreId);
             return View(userParam);
         }
@@ -175,15 +184,19 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>view index of user</returns>
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id!=null)
+            if (id==null)
             {
-                _userService.Delete(id.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                return BadRequest();
+            }
+            var rmUser=await _userService.Delete(id.Value);
+            if (rmUser)
+            {
+                TempData["Successfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
                 return RedirectToAction("Index");
             }
-            ViewData["DeleteFailure"] = "err_Failure";
+            TempData["Failure"] = _localizer.GetLocalizedString("err_DeleteFailure").ToString();
             return RedirectToAction("Index");
             
         }

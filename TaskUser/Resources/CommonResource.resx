@@ -70,6 +70,22 @@
             Edit Successfuly
         </value>
     </data>
+   
+    <data name="err_AddFailure">
+        <value>
+            Thêm Thất Bại
+        </value>
+    </data>
+    <data name="err_EditFailure">
+        <value>
+            Sửa Thất Bại
+        </value>
+    </data>
+    <data name="err_DeleteFailure">
+        <value>
+            Xóa Thất Bại
+        </value>
+    </data>
     <data name="btn_Edit">
         <value>Edit</value>
     </data>

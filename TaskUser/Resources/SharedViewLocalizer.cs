@@ -24,14 +24,14 @@ namespace TaskUser.Resources
         
 
     }
-    public class BrandResource{}
-    public class CategoryResource{}
-    public class ProductResource{}
-    public class LoginResource{}
-    public class StockResource{}
-    public class CommonResource{}
-    public class StoreResource{}
-    public class UserResource{}
-    public class PasswordResource{}
+//    public class BrandResource{}
+//    public class CategoryResource{}
+//    public class ProductResource{}
+//    public class LoginResource{}
+//    public class StockResource{}
+//    public class CommonResource{}
+//    public class StoreResource{}
+//    public class UserResource{}
+//    public class PasswordResource{}
  
 }

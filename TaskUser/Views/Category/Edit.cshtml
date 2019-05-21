@@ -10,7 +10,8 @@
     
     <form method="post" asp-controller="Category" asp-action="Edit">
         <legend>@CategoryLocalizer.GetLocalizedString("lbl_EditCategory")</legend>
-        @*<input type="hidden" class="form-control" asp-for="Id"  placeholder="Your name" required>*@
+        <input type="hidden" class="form-control" asp-for="Id">
+
         <div class="form-group col-xs-6">
             <label>
                 @CategoryLocalizer.GetLocalizedString("lbl_CategoryName")

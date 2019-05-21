@@ -14,13 +14,12 @@ namespace TaskUser.Service
     {
         Task<List<ProductViewsModels>> GetProductListAsync();
 
-        Task<ProductViewsModels> AddProductAsync(ProductViewsModels addProduct);
+        Task<bool> AddProductAsync(ProductViewsModels addProduct);
 
         IEnumerable<Product> GetProduct();
-//        Task<AddStoreViewModels> Create(AddStoreViewModels addStore);
         Task<ProductViewsModels> GetIdProductAsync(int id);
-        Task<ProductViewsModels> EditProductAsync(int id, ProductViewsModels editProduct);
-        void Delete(int id);
+        Task<bool> EditProductAsync(ProductViewsModels editProduct);
+        Task<bool> Delete(int id);
     }
 
     public class ProductService : IProductService
@@ -46,26 +45,35 @@ namespace TaskUser.Service
             return _context.Products;
         }
         //create product 
-        public async Task<ProductViewsModels> AddProductAsync(ProductViewsModels addProduct)
+        public async Task<bool> AddProductAsync(ProductViewsModels addProduct)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", addProduct.PictureFile.FileName);
-            using ( var stream = new FileStream(path,FileMode.Create))
+            try
             {
-                await addProduct.PictureFile.CopyToAsync(stream);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", addProduct.PictureFile.FileName);
+                using ( var stream = new FileStream(path,FileMode.Create))
+                {
+                    await addProduct.PictureFile.CopyToAsync(stream);
                 
+                }
+                var product = new Product()
+                {
+                    ProductName = addProduct.ProductName,
+                    BrandId = addProduct.BrandId,
+                    CategoryId = addProduct.CategoryId,
+                    ModelYear = addProduct.ModelYear,
+                    ListPrice = addProduct.ListPrice,
+                    Picture = addProduct.PictureFile.FileName
+                };  
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+                return true;
             }
-            var product = new Product()
+            catch (Exception e)
             {
-                ProductName = addProduct.ProductName,
-                BrandId = addProduct.BrandId,
-                CategoryId = addProduct.CategoryId,
-                ModelYear = addProduct.ModelYear,
-                ListPrice = addProduct.ListPrice,
-                Picture = addProduct.PictureFile.FileName
-            };  
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return addProduct;
+                Console.WriteLine(e);
+                return false;
+            }
+            
             
             
         }
@@ -77,7 +85,7 @@ namespace TaskUser.Service
             return productDtos;
         }
         // edit post product
-        public async Task<ProductViewsModels> EditProductAsync(int id, ProductViewsModels editProduct)
+        public async Task<bool> EditProductAsync(ProductViewsModels editProduct)
         {
             try
             {
@@ -87,7 +95,7 @@ namespace TaskUser.Service
                     await editProduct.PictureFile.CopyToAsync(stream);
                 
                 }
-                var product =await _context.Products.FindAsync(id);
+                var product =await _context.Products.FindAsync(editProduct.Id);
             
                 product.BrandId = editProduct.BrandId;
                 product.CategoryId = editProduct.CategoryId;
@@ -98,24 +106,33 @@ namespace TaskUser.Service
            
                 _context.Products.Update(product);
                 await _context.SaveChangesAsync();
-                return editProduct;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
             
 
         }
         //delete product
-        public void Delete(int id)
+        public async Task<bool>Delete(int id)
         {
-            var product = _context.Products.Find(id);
-            if (product == null) 
-                return;
-            _context.Products.Remove(product);
-            _context.SaveChanges();
+            try
+            {
+                var product = await _context.Products.FindAsync(id);
+            
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            ;
         }
         
 

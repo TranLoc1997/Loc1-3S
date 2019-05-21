@@ -65,26 +65,32 @@ namespace TaskUser.Controllers
             if (ModelState.IsValid)
             {
                 var addProduct = await _productService.AddProductAsync(product);
-                if (addProduct != null)
+                if (addProduct)
                 { 
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
                     return RedirectToAction("Index");
                 }
+                
+                TempData["Failure"] = _localizer.GetLocalizedString("msg_AddFailure").ToString();
+                ViewBag.CategoryId = new SelectList(_categoryService.GetCategory(), 
+                    "Id", "CategoryName",product.CategoryId);  
+                ViewBag.BrandId = new SelectList(_brandService.Getbrand(), 
+                    "Id", "BrandName",product.BrandId);
+                return View(product);
             }
-
-            ViewData["AddFailure"] = _productLocalizer.GetLocalizedString("err_AddFailure");
+            
             ViewBag.CategoryId = new SelectList(_categoryService.GetCategory(), 
                 "Id", "CategoryName",product.CategoryId);  
             ViewBag.BrandId = new SelectList(_brandService.Getbrand(), 
                 "Id", "BrandName",product.BrandId);
-            return View();
+            return View(product);
         }
         
         /// <summary>
-/// get edit product
-/// </summary>
-/// <param name="id"></param>
-/// <returns>view edit of product</returns>
+        /// get edit product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>view edit of product</returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -102,38 +108,35 @@ namespace TaskUser.Controllers
         /// <summary>
         /// post edit product
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="editProduct"></param>
         /// <returns>view index of product</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int id ,ProductViewsModels editProduct)
+        public async Task<IActionResult> Edit(ProductViewsModels editProduct)
         {
            
             if (ModelState.IsValid)
             {
-              
-                if (id == editProduct.Id)
+                var product= await _productService.EditProductAsync(editProduct);
+                if (product)
                 {
-                        
-                    await _productService.EditProductAsync(id,editProduct);
-                    TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
-                    return RedirectToAction("Index");
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
+                    return RedirectToAction("Index");  
                 }
-                ViewData["EditFailure"] = _productLocalizer.GetLocalizedString("err_EditFailure");
+               
+                TempData["Failure"] = _localizer.GetLocalizedString("msg_EditFailure").ToString();
                 ViewBag.CategoryId = new SelectList(_categoryService.GetCategory(), 
                     "Id", "CategoryName",editProduct.CategoryId);  
                 ViewBag.BrandId = new SelectList(_brandService.Getbrand(), 
                     "Id", "BrandName",editProduct.BrandId);
                 
-                return BadRequest();
+                return View(editProduct);
                 
             }
-            ViewData["EditFailure"] = _productLocalizer.GetLocalizedString("err_EditFailure");
             ViewBag.CategoryId = new SelectList(_categoryService.GetCategory(), 
                 "Id", "CategoryName",editProduct.CategoryId);  
             ViewBag.BrandId = new SelectList(_brandService.Getbrand(), 
                 "Id", "BrandName",editProduct.BrandId);
-            return View();
+            return View(editProduct);
         }
         
         /// <summary>
@@ -142,15 +145,19 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>delete of product</returns>
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id!=null)
+            if (id==null)
             {
-                _productService.Delete(id.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                return BadRequest();
+            }
+            var rmProduct=await _productService.Delete(id.Value);
+            if (rmProduct)
+            {
+                TempData["Successfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
                 return RedirectToAction("Index");
             }
-            ViewData["DeleteFailure"] = "err_Failure";
+            TempData["Failure"] = _localizer.GetLocalizedString("err_DeleteFailure").ToString();
             return RedirectToAction("Index");
             
         }

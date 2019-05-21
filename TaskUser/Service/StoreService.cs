@@ -14,11 +14,11 @@ namespace TaskUser.Service
     {
         Task<List<StoreViewModels>> GetStoreListAsync();
         IEnumerable<Store> GetStore();
-        Task<StoreViewModels> AddStoreAsync(StoreViewModels addStore);
+        Task<bool> AddStoreAsync(StoreViewModels addStore);
         Task<StoreViewModels> GetIdStoreAsync(int id); //
-        Task<StoreViewModels> EditStoreAsync(int id, StoreViewModels editStore);
+        Task<bool> EditStoreAsync(StoreViewModels editStore);
         bool IsExistedEmailStore(int id, string email);
-        void Delete(int id);
+        Task<bool> Delete(int id);
 
 
 
@@ -33,7 +33,7 @@ namespace TaskUser.Service
             _context = context;
             _mapper = mapper;
         }
-//        
+      
 //
        // get show store
         public async Task<List<StoreViewModels>> GetStoreListAsync()//
@@ -49,23 +49,32 @@ namespace TaskUser.Service
             return _context.Stores;
         } 
         // get create store
-        public async Task<StoreViewModels> AddStoreAsync(StoreViewModels addStore)
-        {            
-            var store = new Store()
+        public async Task<bool> AddStoreAsync(StoreViewModels addStore)
+        {
+            try
             {
-                StoreName = addStore.StoreName,
-                Email = addStore.Email,
-                Phone = addStore.Phone,
-                City = addStore.City,
-                State = addStore.State,
-                Street = addStore.Street,
-                ZipCode = addStore.ZipCode,
+                var store = new Store()
+                {
+                    StoreName = addStore.StoreName,
+                    Email = addStore.Email,
+                    Phone = addStore.Phone,
+                    City = addStore.City,
+                    State = addStore.State,
+                    Street = addStore.Street,
+                    ZipCode = addStore.ZipCode,
                     
-            };
+                };
             
-            await _context.Stores.AddAsync(store);
-            await _context.SaveChangesAsync();
-            return addStore;
+                await _context.Stores.AddAsync(store);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }  
         //get edit id store
         public async Task<StoreViewModels> GetIdStoreAsync(int id)
@@ -75,11 +84,11 @@ namespace TaskUser.Service
             return storeDtos;
         }
         // get edit store
-        public async Task<StoreViewModels> EditStoreAsync(int id, StoreViewModels editStore)
+        public async Task<bool> EditStoreAsync(StoreViewModels editStore)
         {
             try
             {
-                var store =await _context.Stores.FindAsync(id);
+                var store =await _context.Stores.FindAsync(editStore.Id);
             
                 store.StoreName = editStore.StoreName;
                 store.Email = editStore.Email;
@@ -90,12 +99,12 @@ namespace TaskUser.Service
                 store.ZipCode = editStore.ZipCode;
                 _context.Stores.Update(store);
                 await _context.SaveChangesAsync();
-                return editStore;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
             
 
@@ -107,13 +116,21 @@ namespace TaskUser.Service
         }
         
         //delete store
-        public void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var store = _context.Stores.Find(id);
-            if (store == null) 
-                return;
-            _context.Stores.Remove(store);
-            _context.SaveChanges();
+            try
+            {
+                var store = await _context.Stores.FindAsync(id);
+                _context.Stores.Remove(store);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
 
         

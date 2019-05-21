@@ -13,12 +13,12 @@ namespace TaskUser.Service
     public interface ICategoryService
     {
         Task<List<CategoryViewsModels>> GetCategoryListAsync();
-        Task<CategoryViewsModels> AddCategoryAsync(CategoryViewsModels addCategory);
+        Task<bool> AddCategoryAsync(CategoryViewsModels addCategory);
         IEnumerable<Category> GetCategory();
         Task<CategoryViewsModels> GetIdCategoryAsync(int id);
-        Task<CategoryViewsModels> EditCategoryAsync(int id, CategoryViewsModels editCategory);
+        Task<bool> EditCategoryAsync(CategoryViewsModels editCategory);
         bool IsExistedName(int id, string name);
-        void Delete(int id);
+        Task<bool> Delete(int id);
     }
 
     public class CategoryService : ICategoryService
@@ -39,18 +39,27 @@ namespace TaskUser.Service
             return listCategory;
         }
         // create category
-        public async Task<CategoryViewsModels> AddCategoryAsync(CategoryViewsModels addCategory)
-        {            
-            var category = new Category()
+        public async Task<bool> AddCategoryAsync(CategoryViewsModels addCategory)
+        {
+            try
             {
-                CategoryName = addCategory.CategoryName,
+                var category = new Category()
+                {
+                    CategoryName = addCategory.CategoryName,
                 
                     
-            };
+                };
             
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-            return addCategory;
+                _context.Categories.Add(category);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
     
         public IEnumerable<Category> GetCategory()
@@ -65,23 +74,23 @@ namespace TaskUser.Service
             return categoryDtos;
         }
         //post edit category
-        public async Task<CategoryViewsModels> EditCategoryAsync(int id, CategoryViewsModels editCategory)
+        public async Task<bool> EditCategoryAsync(CategoryViewsModels editCategory)
         {
             try
             {
-                var category =await _context.Categories.FindAsync(id);
+                var category =await _context.Categories.FindAsync(editCategory.Id);
             
                 category.CategoryName = editCategory.CategoryName;
             
                 _context.Categories.Update(category);
                 await _context.SaveChangesAsync();
-                return editCategory;
+                return true;
 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
             
 
@@ -91,13 +100,22 @@ namespace TaskUser.Service
             return _context.Categories.Any(x => x.CategoryName == name && x.Id != id);
         }
         // delete category
-        public void Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var category = _context.Categories.Find(id);
-            if (category == null) 
-                return;
-            _context.Categories.Remove(category);
-            _context.SaveChanges();
+            try
+            {
+                var category = await _context.Categories.FindAsync(id);
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            
         }
         
     }

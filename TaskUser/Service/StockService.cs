@@ -10,20 +10,20 @@ using TaskUser.ViewsModels.Stock;
 
 namespace TaskUser.Service
 {
-   
+
     public interface IStockService
     {
         Task<List<StockViewModels>> GetStockListAsync();
-        
-        Task<StockViewModels> AddStockAsync(StockViewModels addStock);
+
+        Task<bool> AddStockAsync(StockViewModels addStock);
 
         IEnumerable<Stock> GetStock();
-        
-        Task<StockViewModels> GetIdStockAsync(int productId , int storeId);
 
-        Task<StockViewModels> EditStockAsync(int productId , int storeId, StockViewModels editStock);
+        Task<StockViewModels> GetIdStockAsync(int productId, int storeId);
 
-        void Delete(int? productId, int? storeId);
+        Task<bool> EditStockAsync(StockViewModels editStock);
+
+        Task<bool> Delete(int productId, int storeId);
 
     }
 
@@ -37,10 +37,11 @@ namespace TaskUser.Service
             _context = context;
             _mapper = mapper;
         }
-       //get show list stock
+
+        //get show list stock
         public async Task<List<StockViewModels>> GetStockListAsync()
         {
-            var list = await _context.Stocks.Include(s=>s.Store).Include(p=>p.Product).ToListAsync();
+            var list = await _context.Stocks.Include(s => s.Store).Include(p => p.Product).ToListAsync();
             var listStock = _mapper.Map<List<StockViewModels>>(list);
             return listStock;
         }
@@ -48,75 +49,98 @@ namespace TaskUser.Service
         public IEnumerable<Stock> GetStock()
         {
             return _context.Stocks;
-        } 
+        }
+
         //get create stock
-        public async Task<StockViewModels> AddStockAsync(StockViewModels addStock)
-        {
-            var ckeck =await _context.Stocks.FindAsync(addStock.ProductId, addStock.StoreId);
-            if (ckeck!=null)
-            {
-                ckeck.Quantity += addStock.Quantity;
-                _context.Stocks.Update(ckeck);
-               await _context.SaveChangesAsync();
-                return addStock;
-
-            }
-            else
-            {
-                var stock = new Stock()
-                {
-           
-                    ProductId = addStock.ProductId,
-                    StoreId = addStock.StoreId,
-                    Quantity = addStock.Quantity
-                
-                    
-                };
-
-                _context.Stocks.Add(stock);
-                await _context.SaveChangesAsync();
-                return addStock;
-                
-            }
-
-        }
-        //get id edit stock
-        public async Task<StockViewModels> GetIdStockAsync(int productId , int storeId)
-        {
-            var findStock = await _context.Stocks.FindAsync(productId,storeId);
-           
-            var stockDtos = _mapper.Map<StockViewModels>(findStock);
-            return stockDtos;
-        }
-        // post edit stock
-        public async Task<StockViewModels> EditStockAsync(int productId , int storeId, StockViewModels editStock)
+        public async Task<bool> AddStockAsync(StockViewModels addStock)
         {
             try
             {
-                var ckeckEdit = await _context.Stocks.FindAsync(productId,storeId);
-                ckeckEdit.Quantity = editStock.Quantity;
-                _context.Stocks.Update(ckeckEdit);
+                var ckeck = await _context.Stocks.FindAsync(addStock.ProductId, addStock.StoreId);
+                if (ckeck != null)
+                {
+                    ckeck.Quantity += addStock.Quantity;
+                    _context.Stocks.Update(ckeck);
+                    await _context.SaveChangesAsync();
+                    return true;
+
+                }
+                else
+                {
+                    var stock = new Stock()
+                    {
+
+                        ProductId = addStock.ProductId,
+                        StoreId = addStock.StoreId,
+                        Quantity = addStock.Quantity
+
+
+                    };
+
+                    _context.Stocks.Add(stock);
+                    await _context.SaveChangesAsync();
+                    return true;
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+
+
+
+        }
+
+        //get id edit stock
+        public async Task<StockViewModels> GetIdStockAsync(int productId, int storeId)
+        {
+            var findStock = await _context.Stocks.FindAsync(productId, storeId);
+
+            var stockDtos = _mapper.Map<StockViewModels>(findStock);
+            return stockDtos;
+        }
+
+        // post edit stock
+        public async Task<bool> EditStockAsync(StockViewModels editStock)
+        {
+            try
+            {
+                var checkEdit = await _context.Stocks.FindAsync(editStock.ProductId,editStock.StoreId);
+                checkEdit.Quantity = editStock.Quantity;
+                _context.Stocks.Update(checkEdit);
                 await _context.SaveChangesAsync();
-                return editStock;
+                return true;
 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return null;
+                return false;
             }
-            
+
         }
+
         //delete stock
-        public void Delete(int? productId , int? storeId)
+        public async Task<bool> Delete(int productId, int storeId)
         {
-            var stock = _context.Stocks.FirstOrDefault(x=>x.ProductId == productId && x.StoreId == storeId);
-            if (stock == null) 
-                return;
-            _context.Stocks.Remove(stock);
-            _context.SaveChanges();
+            try
+            {
+                var stock = await _context.Stocks.FindAsync(productId, storeId);
+
+                _context.Stocks.Remove(stock);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+
+
         }
-       
+
     }
-    
 }

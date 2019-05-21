@@ -14,7 +14,7 @@ namespace TaskUser.Controllers
         /// <summary>
         /// Isevice
         /// </summary>
-       private readonly IStockService _stockService;
+        private readonly IStockService _stockService;
         private readonly IStoreService _storeService;
         private readonly IProductService _productService;
         private readonly SharedViewLocalizer<CommonResource> _localizer;
@@ -24,7 +24,7 @@ namespace TaskUser.Controllers
             IProductService productService,
             SharedViewLocalizer<CommonResource> localizer,
             SharedViewLocalizer<StockResource> stockLocalizer
-           )
+        )
         {
             _stockService = stockService;
             _storeService = storeService;
@@ -70,18 +70,25 @@ namespace TaskUser.Controllers
             {
                 
                 var addStock = await _stockService.AddStockAsync(stock);
-                if (addStock != null)
+                if (addStock)
                 {
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
-                    return RedirectToAction("Index", addStock);
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
+                    return RedirectToAction("Index");
                 }
+                
+                TempData["Failure"] = _localizer.GetLocalizedString("err_AddFailure").ToString();
+                ViewBag.StoreId = new SelectList(_storeService.GetStore(), 
+                    "Id", "StoreName",stock.StoreId);
+                ViewBag.ProductID = new SelectList(_productService.GetProduct(), 
+                    "Id", "StoreName",stock.ProductId);
+                return View(stock);
             }
-            ViewData["AddFailure"] = _stockLocalizer.GetLocalizedString("err_AddFailure");
+            
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), 
                 "Id", "StoreName",stock.StoreId);
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), 
                 "Id", "StoreName",stock.ProductId);
-            return View();
+            return View(stock);
         }
         
         /// <summary>
@@ -91,9 +98,10 @@ namespace TaskUser.Controllers
         /// <param name="storeId"></param>
         /// <returns>return edit of stock</returns>
         [HttpGet]
-        public  async Task<IActionResult> Edit(int?  productId,int?storeId)
+        public  async Task<IActionResult> Edit(int?  productId,int? storeId)
         {
-            if (productId == null || storeId == null) return View();
+            if (productId == null || storeId == null) 
+                return BadRequest();
             var getStock = await _stockService.GetIdStockAsync(productId.Value, storeId.Value);
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName");
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
@@ -106,54 +114,59 @@ namespace TaskUser.Controllers
         /// <summary>
         /// get edit stock
         /// </summary>
-        /// <param name="productId"></param>
-        /// <param name="storeId"></param>
         /// <param name="editStock"></param>
         /// <returns>view index of edir</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int ?productId,int ?storeId,StockViewModels editStock)
+        public async Task<IActionResult> Edit(StockViewModels editStock)
         {
            
             if (ModelState.IsValid)
             {
-                
-                    if (productId == editStock.ProductId && storeId==editStock.StoreId)
-                    {
                         
-                        await _stockService.EditStockAsync(productId.Value,storeId.Value,editStock);
-                        TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
-                        return RedirectToAction("Index");
-                    }
-                
-                    return BadRequest();
+                var product= await _stockService.EditStockAsync(editStock);
+                if (product)
+                {
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
+                    return RedirectToAction("Index");
+
+                }
+                TempData["Failure"] = _localizer.GetLocalizedString("err_EditFailure").ToString();
+                ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName");
+                ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
+                return View(editStock);
+
                
             }
             
-            ViewData["EditFailure"] = _stockLocalizer.GetLocalizedString("err_EditFailure");
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName");
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
-            return View();
+            return View(editStock);
         }
         
         /// <summary>
-/// delete of sstock
-/// </summary>
-/// <param name="productId"></param>
-/// <param name="storeId"></param>
-/// <returns>index</returns>
+        /// delete of sstock
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="storeId"></param>
+        /// <returns>index</returns>
         [HttpGet]
-        public IActionResult Delete(int? productId,int? storeId)
+        public async Task<IActionResult> Delete(int? productId,int? storeId)
         {
             if (productId ==null || storeId ==null )
             {
-                ViewData["DeleteFailure"] = "err_Failure";
-                return RedirectToAction("Index");
-                
-                
+                return BadRequest();
+
+
             }
-            _stockService.Delete(productId.Value,storeId.Value);
-            TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+           var rmProduct = await _stockService.Delete(productId.Value,storeId.Value);
+            if (rmProduct)
+            {
+                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                return RedirectToAction("Index");
+            }
+            TempData["Failure"] = _localizer.GetLocalizedString("err_DeleteFailure").ToString();
             return RedirectToAction("Index");
+            
             
            
         }

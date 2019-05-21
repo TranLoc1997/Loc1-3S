@@ -56,13 +56,15 @@ namespace TaskUser.Controllers
             {
                 
                 var addCategory = await _category.AddCategoryAsync(category);
-                if (addCategory != null)
+                if (addCategory)
                 {
-                    TempData["AddSuccessfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_AddSuccessfuly").ToString();
                     return RedirectToAction("Index");
                 }
+                TempData["Failure"] = _localizer.GetLocalizedString("err_EditFailure").ToString();
+                return View(category);
+                
             }
-            ViewData["AddFailure"] = _categoryLocalizer.GetLocalizedString("err_AddFailure");
             return View(category);
         }
         
@@ -84,31 +86,29 @@ namespace TaskUser.Controllers
         }
         
         /// <summary>
-/// post edit category
-/// </summary>
-/// <param name="id"></param>
-/// <param name="editCategory"></param>
-/// <returns>return index category</returns>
+        /// post edit category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="editCategory"></param>
+        /// <returns>return index category</returns>
         [HttpPost]
-        public async Task<IActionResult> Edit(int ?id ,CategoryViewsModels editCategory)
+        public async Task<IActionResult> Edit(CategoryViewsModels editCategory)
         {
            
-            if (ModelState.IsValid)
-                if (id==editCategory.Id)
-                { 
+            if (ModelState.IsValid){
+                
                     
-                    await _category.EditCategoryAsync(id.Value,editCategory);
-                    TempData["EditSuccessfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
+                var category = await _category.EditCategoryAsync(editCategory);
+                if (category)
+                {
+                    TempData["Successfuly"] = _localizer.GetLocalizedString("msg_EditSuccessfuly").ToString();
                     return RedirectToAction("Index");
-                    
+                
                 }
-            if (id == null)
-            {
-                ViewData["EditFailure"] = _categoryLocalizer.GetLocalizedString("err_EditFailure");
-                return BadRequest();
+                TempData["Failure"] = _localizer.GetLocalizedString("err_EditFailure").ToString();
+                return View(editCategory);
             }
-            ViewData["EditFailure"] = _categoryLocalizer.GetLocalizedString("err_EditFailure");
-            return View();
+            return View(editCategory);
         }
         
         /// <summary>
@@ -117,15 +117,20 @@ namespace TaskUser.Controllers
         /// <param name="id"></param>
         /// <returns>index category</returns>
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id!=null)
+            if (id==null)
             {
-                _category.Delete(id.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
-                return RedirectToAction("Index");
+                return BadRequest();
             }
-            ViewData["DeleteFailure"] = "err_Failure";
+            var rmCategory=await _category.Delete(id.Value);
+            if (rmCategory)
+            {
+                TempData["Successfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                return RedirectToAction("Index");
+                
+            }
+            TempData["Failure"] = _localizer.GetLocalizedString("err_DeleteFailure").ToString();
             return RedirectToAction("Index");
             
         }
