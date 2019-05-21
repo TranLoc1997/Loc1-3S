@@ -144,15 +144,17 @@ namespace TaskUser.Controllers
         [HttpGet]
         public IActionResult Delete(int? productId,int? storeId)
         {
-            if (productId !=null && storeId !=null )
+            if (productId ==null || storeId ==null )
             {
-                _stockService.Delete(productId.Value,storeId.Value);
-                TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
+                ViewData["DeleteFailure"] = "err_Failure";
                 return RedirectToAction("Index");
                 
+                
             }
-            ViewData["DeleteFailure"] = "err_Failure";
+            _stockService.Delete(productId.Value,storeId.Value);
+            TempData["DeleteSuccessfuly"] = _localizer.GetLocalizedString("msg_DeleteSuccessfuly").ToString();
             return RedirectToAction("Index");
+            
            
         }
         

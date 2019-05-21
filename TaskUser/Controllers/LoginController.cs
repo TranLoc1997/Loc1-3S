@@ -71,7 +71,7 @@ namespace TaskUser.Controllers
         /// Logout 
         /// </summary>
         /// <returns>Login xóa session name</returns>
-        [ServiceFilter(typeof(ActionFilter))]
+        
         [HttpGet]
         public IActionResult Logout()
         {

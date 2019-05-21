@@ -142,6 +142,7 @@
           <e p="_LayoutLogin.cshtml" t="Include" />
           <e p="_SibaPartial.cshtml" t="Include" />
           <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+          <e p="_msgLayout.cshtml" t="Include" />
         </e>
         <e p="Stock" t="Include">
           <e p="Create.cshtml" t="Include" />

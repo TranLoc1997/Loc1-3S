@@ -34,9 +34,6 @@
                 @UserLocalizer.GetLocalizedString("lbl_Email")
              
             </th>
-            @*     <th> *@
-            @*         @Localizer["PassWord"] *@
-            @*     </th> *@
             <th>
                 @UserLocalizer.GetLocalizedString("lbl_Phone")
             </th>
@@ -70,9 +67,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                @* <td> *@
-                @*     @Html.DisplayFor(modelItem => item.PassWord) *@
-                @* </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
@@ -97,12 +91,7 @@
                     </a>
                 </td>
             </tr>
-@*              <div id='Paging' style="text-align:center"> *@
-@*                  Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) *@
-@*                  of @Model.PageCount *@
-@* *@
-@*                  @Html.PagedListPager(Model, page => Url.Action("Index", new { page })) *@
-@*              </div> *@
+
         }
         </tbody>
     </table>

@@ -7,14 +7,7 @@
 
 
 <div class="container">
-    @if (ViewData["EditFailure"] != null)
-    {
-        <div class="alert alert-info"style="width: 200px">
-            <strong>@ViewData["EditFailure"]</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-        </div>
- 
-    }
+   
     <form method="post" asp-controller="Stock" enctype="multipart/form-data" asp-action="Edit">
         <legend>@StockLocalizer.GetLocalizedString("lbl_EditStock")</legend>
         @*<input type="hidden" class="form-control" asp-for="Id"  placeholder="Your name" required>*@

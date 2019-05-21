@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="~/img/loginicon.png" type="image/x-icon">
+    <title>@ViewData["Title"] - Văn Lộc</title>
+
+ 
+</head>
+<body>
+
+@if (TempData["AddSuccessfuly"] != null)
+{
+    <div class="alert alert-info"style="width: 200px">
+        <strong>@TempData["AddSuccessfuly"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+    </div>
+ 
+}
+@if (TempData["EditSuccessfuly"] != null)
+{
+    <div class="alert alert-info"style="width: 200px">
+        <strong>@TempData["EditSuccessfuly"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+@if (TempData["DeleteSuccessfuly"] != null)
+{
+    <div class="alert alert-info" style="width: 200px">
+        <strong>@TempData["DeleteSuccessfuly"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+           
+@if (TempData["EditPasswordSuccessfuly"] != null)
+{
+    <div class="alert alert-info" style="width: 280px">
+        <strong>@TempData["EditPasswordSuccessfuly"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+    </div>
+}
+            
+@if (ViewData["AddFailure"] != null)
+{
+    <div class="alert alert-info"style="width: 200px">
+        <strong>@ViewData["AddFailure"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+    </div>
+ 
+}
+            
+@if (ViewData["EditFailure"] != null)
+{
+    <div class="alert alert-info"style="width: 200px">
+        <strong>@ViewData["EditFailure"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+    </div>
+ 
+}
+
+</body>
+</html>

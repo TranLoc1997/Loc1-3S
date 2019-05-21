@@ -1,6 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using TaskUser.Filters;
+using TaskUser.Models;
 using TaskUser.Resources;
 using TaskUser.Service;
 using TaskUser.ViewsModels.Brand;
@@ -11,13 +15,15 @@ namespace TaskUser.Controllers
     public class BrandController : Controller
     {
         private readonly IBrandService _brandService;
+        private readonly DataContext _context;
         private readonly SharedViewLocalizer<CommonResource> _localizer;
         private readonly SharedViewLocalizer<BrandResource> _brandLocalizer;
-        public BrandController(IBrandService  brandService,SharedViewLocalizer<CommonResource> localizer,SharedViewLocalizer<BrandResource> brandLocalizer)
+        public BrandController(IBrandService  brandService,SharedViewLocalizer<CommonResource> localizer,SharedViewLocalizer<BrandResource> brandLocalizer,DataContext context)
         {
             _brandService = brandService;
             _brandLocalizer = brandLocalizer;
             _localizer = localizer;
+            _context = context;
 
         }
         
@@ -26,13 +32,20 @@ namespace TaskUser.Controllers
         /// show index brand
         /// </summary>
         /// <returns>viewbrand</returns>
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page =1)
         {
             var listBrand = await _brandService.GetBranListAsync();
             return View(listBrand);
 
-
         }
+//        public async Task<IActionResult> Index()
+//        {
+//            var listBrand = await _brandService.GetBranListAsync();
+//            return View(listBrand);
+//
+//        }
+        
+
         
         /// <summary>
         /// get create brand

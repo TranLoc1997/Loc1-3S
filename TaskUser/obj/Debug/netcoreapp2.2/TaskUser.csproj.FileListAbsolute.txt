@@ -625,4 +625,5 @@ C:/Users/Vanlo/OneDrive/Máy tính/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/TaskUser.dll
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/TaskUser.pdb
 /home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/TaskUser.csproj.CopyComplete
-/home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Error/Error404 .g.cshtml.cs
+/home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Error/Error404.g.cshtml.cs
+/home/local/3SI/loc.tv/Desktop/Loc-3S/Loc-3S/TaskUser/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_msgLayout.g.cshtml.cs

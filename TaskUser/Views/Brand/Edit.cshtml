@@ -1,21 +1,12 @@
 ﻿@model TaskUser.ViewsModels.Brand.BrandViewsModels
 
-
-
 @{
     ViewBag.Title = BrandLocalizer.GetLocalizedString("lbl_BrandName");
     Layout = "_Layout";
 }
 
 <div class="container">
-    @if (ViewData["EditFailure"] != null)
-    {
-        <div class="alert alert-info"style="width: 200px">
-            <strong>@ViewData["EditFailure"]</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-        </div>
- 
-    }
+    
     <form method="post" asp-controller="Brand" asp-action="Edit">
         <legend>
             @BrandLocalizer.GetLocalizedString("lbl_EditBrand")

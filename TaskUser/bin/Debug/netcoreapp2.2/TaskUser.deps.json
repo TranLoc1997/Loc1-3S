@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "08bc3eddd74a1810145e347c50a2b68371b61c0c"
+    "signature": "d044cfa30e9825029e5680827a55c488bfe5bdc8"
   },
   "compilationOptions": {
     "defines": [
@@ -29,7 +29,8 @@
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
-          "PagedList.Mvc": "4.5.0"
+          "PagedList.Mvc": "4.5.0",
+          "ReflectionIT.Mvc.Paging": "3.4.0"
         },
         "runtime": {
           "TaskUser.dll": {}
@@ -144,6 +145,26 @@
         },
         "compile": {
           "lib/net40/PagedList.Mvc.dll": {}
+        }
+      },
+      "ReflectionIT.Mvc.Paging/3.4.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.Views.dll": {
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
+          },
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.Views.dll": {},
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3396,6 +3417,13 @@
       "sha512": "sha512-xGTT268/6/vS+mTk39MNL9Z20410eATJvZ/UVE0bFIje17ab4cMWHokK43NoY7PLQlG9l572GA8H4JsJ9c/lMA==",
       "path": "pagedlist.mvc/4.5.0",
       "hashPath": "pagedlist.mvc.4.5.0.nupkg.sha512"
+    },
+    "ReflectionIT.Mvc.Paging/3.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sMx83eVJGecV05uSHSRel4Q5WMa+g7tX6iuhgkrvgTHuPF7Ow/pY89iREQl7fpNhoZKXFE5beOmXof6i4qxNvg==",
+      "path": "reflectionit.mvc.paging/3.4.0",
+      "hashPath": "reflectionit.mvc.paging.3.4.0.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",

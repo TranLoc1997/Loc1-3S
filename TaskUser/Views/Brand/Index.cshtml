@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TaskUser.ViewsModels.Brand.BrandViewsModels>
+
 <link rel="stylesheet" href="~/css/indexcs.css" />
 @{
     ViewBag.Title = BrandLocalizer.GetLocalizedString("lbl_BrandManage");
@@ -45,12 +46,7 @@
                     </a>
                 </td>
             </tr>
-@*              <div id='Paging' style="text-align:center"> *@
-@*                  Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) *@
-@*                  of @Model.PageCount *@
-@* *@
-@*                  @Html.PagedListPager(Model, page => Url.Action("Index", new { page })) *@
-@*              </div> *@
+           
         }
         </tbody>
     </table>

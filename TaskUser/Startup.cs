@@ -114,8 +114,7 @@ namespace TaskUser
             services.AddAutoMapper();
             services.AddScoped<ActionFilter>();
             services.AddHttpContextAccessor();
-
-
+          
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BrandValidator>()
                 );
