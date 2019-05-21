@@ -33,7 +33,8 @@ namespace TaskUser.Controllers
             _stockLocalizer = stockLocalizer;
 
         }
-        // GET
+        
+        
         /// <summary>
         /// show index tock
         /// </summary>
@@ -44,6 +45,7 @@ namespace TaskUser.Controllers
             return View(listStock);
 
         }
+        
         /// <summary>
         /// get create stock
         /// </summary>
@@ -55,6 +57,7 @@ namespace TaskUser.Controllers
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
             return View();
         }
+        
         /// <summary>
         /// post create of stock
         /// </summary>
@@ -80,13 +83,13 @@ namespace TaskUser.Controllers
                 "Id", "StoreName",stock.ProductId);
             return View();
         }
+        
         /// <summary>
         /// get edit stock
         /// </summary>
         /// <param name="productId"></param>
         /// <param name="storeId"></param>
         /// <returns>return edit of stock</returns>
-
         [HttpGet]
         public  async Task<IActionResult> Edit(int?  productId,int?storeId)
         {
@@ -99,6 +102,7 @@ namespace TaskUser.Controllers
 
 
         }
+        
         /// <summary>
         /// get edit stock
         /// </summary>
@@ -130,6 +134,7 @@ namespace TaskUser.Controllers
             ViewBag.ProductID = new SelectList(_productService.GetProduct(), "Id", "ProductName");
             return View();
         }
+        
         /// <summary>
 /// delete of sstock
 /// </summary>

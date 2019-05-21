@@ -10,7 +10,7 @@ namespace TaskUser.Controllers
     [ServiceFilter(typeof(ActionFilter))]
     public class CategoryController : Controller
     {
-        // GET
+       
         private readonly ICategoryService _category;
         private readonly SharedViewLocalizer<CommonResource> _localizer;
         private readonly SharedViewLocalizer<CategoryResource> _categoryLocalizer;
@@ -21,7 +21,8 @@ namespace TaskUser.Controllers
             _categoryLocalizer = categoryLocalizer;
 
         }
-        // GET
+        
+        
         /// <summary>
         /// show category    
         /// </summary>
@@ -32,6 +33,7 @@ namespace TaskUser.Controllers
             return View(listCateogry);
 
         }
+        
         /// <summary>
         /// get create category    
         /// </summary>
@@ -41,6 +43,7 @@ namespace TaskUser.Controllers
         {
             return View();
         }
+        
         /// <summary>
         /// post create category
         /// </summary>
@@ -62,6 +65,7 @@ namespace TaskUser.Controllers
             ViewData["AddFailure"] = _categoryLocalizer.GetLocalizedString("err_AddFailure");
             return View(category);
         }
+        
         /// <summary>
         /// get edit category
         /// </summary>
@@ -78,6 +82,7 @@ namespace TaskUser.Controllers
            
             return View(getCategory);
         }
+        
         /// <summary>
 /// post edit category
 /// </summary>
@@ -105,6 +110,7 @@ namespace TaskUser.Controllers
             ViewData["EditFailure"] = _categoryLocalizer.GetLocalizedString("err_EditFailure");
             return View();
         }
+        
         /// <summary>
         /// function Delete category 
         /// </summary>

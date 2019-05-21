@@ -13,6 +13,12 @@ namespace TaskUser.Controllers
         {
             return View();
         }
+        
+        [Route("Error/404")]
+        public IActionResult Error404()
+        {
+            return View();
+        }
 
     }
 }

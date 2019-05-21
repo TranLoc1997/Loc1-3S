@@ -120,6 +120,7 @@
         </e>
         <e p="Error" t="Include">
           <e p="Error401.cshtml" t="Include" />
+          <e p="Error404.cshtml" t="Include" />
         </e>
         <e p="Home" t="Include">
           <e p="Index.cshtml" t="Include" />
@@ -200,6 +201,7 @@
       <e p="wwwroot" t="Include">
         <e p="css" t="Include">
           <e p="401.css" t="Include" />
+          <e p="404.css" t="Include" />
           <e p="Login.css" t="Include" />
           <e p="indexcs.css" t="Include" />
           <e p="main.css" t="Include" />

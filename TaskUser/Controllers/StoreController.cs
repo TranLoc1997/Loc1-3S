@@ -20,6 +20,7 @@ namespace TaskUser.Controllers
             _storeLocalizer = storeLocalizer;
 
         }
+        
         /// <summary>
         /// show index of store
         /// </summary>
@@ -31,7 +32,6 @@ namespace TaskUser.Controllers
 
         }
         
-        
         /// <summary>
         /// get create of store
         /// </summary>
@@ -41,6 +41,7 @@ namespace TaskUser.Controllers
         {
             return View();
         }
+        
         /// <summary>
         /// post create of store
         /// </summary>
@@ -61,6 +62,7 @@ namespace TaskUser.Controllers
             ViewData["AddFailure"] = _storeLocalizer.GetLocalizedString("err_AddFailure");
             return View();
         }
+        
         /// <summary>
         /// get edit of store
         /// </summary>
@@ -77,13 +79,13 @@ namespace TaskUser.Controllers
            
             return View(getstore);
         }
+        
         /// <summary>
         /// post edit of store
         /// </summary>
         /// <param name="id"></param>
         /// <param name="editStore"></param>
         /// <returns>index of store else view</returns>
-
         [HttpPost]
         public async Task<IActionResult> Edit(int ?id ,StoreViewModels editStore)
         {
@@ -103,6 +105,7 @@ namespace TaskUser.Controllers
             ViewData["EditFailure"] = "err_Failure";
             return View();
         }
+        
         /// <summary>
         /// delete of store
         /// </summary>

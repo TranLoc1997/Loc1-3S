@@ -30,7 +30,8 @@ namespace TaskUser.Controllers
             _productLocalizer = productLocalizer;
 
         }
-        // GET
+        
+        
         /// <summary>
         /// show index product    
         /// </summary>
@@ -40,6 +41,7 @@ namespace TaskUser.Controllers
             var listStore = await _productService.GetProductListAsync();
             return View(listStore);
         }
+        
         /// <summary>
         /// get create of product
         /// </summary>
@@ -51,6 +53,7 @@ namespace TaskUser.Controllers
             ViewBag.CategoryId = new SelectList(_categoryService.GetCategory(), "Id", "CategoryName");  
             return View();
         }
+        
         /// <summary>
         /// post create of product
         /// </summary>
@@ -76,6 +79,7 @@ namespace TaskUser.Controllers
                 "Id", "BrandName",product.BrandId);
             return View();
         }
+        
         /// <summary>
 /// get edit product
 /// </summary>
@@ -94,6 +98,7 @@ namespace TaskUser.Controllers
                    
             return View(getProduct);
         }
+        
         /// <summary>
         /// post edit product
         /// </summary>
@@ -130,6 +135,7 @@ namespace TaskUser.Controllers
                 "Id", "BrandName",editProduct.BrandId);
             return View();
         }
+        
         /// <summary>
         /// get delete of product
         /// </summary>

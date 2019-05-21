@@ -66,6 +66,7 @@ namespace TaskUser.Controllers
 
 
         }
+        
         /// <summary>
         /// Logout 
         /// </summary>
@@ -79,6 +80,7 @@ namespace TaskUser.Controllers
             return RedirectToAction("IndexLogin");
 
         }
+        
         /// <summary>
         /// Language
         /// </summary>

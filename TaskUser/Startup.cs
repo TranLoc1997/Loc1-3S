@@ -153,17 +153,18 @@ namespace TaskUser
                 await next();
                 if (!context.Response.HasStarted && context.Response.StatusCode != StatusCodes.Status200OK)
                 {
-//                    if (context.Response.StatusCode == StatusCodes.Status404NotFound)
-//                    {
-//                        context.Request.Path = "/Error/404";
-//                        await next();
-//                    }
+                  
 
                      if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
                     {
                         context.Request.Path = "/Error/401";
                         await next();
                     }
+                    else if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+//                    {
+                        context.Request.Path = "/Error/404";
+                        await next();
+//                    }
                 } 
             });
             app.UseMvc(routes =>

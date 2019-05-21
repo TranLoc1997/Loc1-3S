@@ -35,13 +35,6 @@ namespace TaskUser.Controllers
 
         }
      
-        [HttpGet]
-        public IActionResult Back()
-        {
-
-            return RedirectToAction("Index");
-
-        }
         /// <summary>
         /// show index of user
         /// </summary>
@@ -57,24 +50,23 @@ namespace TaskUser.Controllers
             return View(listUser);
 
         }
+        
         /// <summary>
         /// get create of user
         /// </summary>
         /// <returns>view create of user</returns>
-        
-        
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.StoreId = new SelectList(_storeService.GetStore(), "Id", "StoreName");
             return View();
         }
+        
         /// <summary>
         /// post create of user
         /// </summary>
         /// <param name="user"></param>
         /// <returns>index of User else view</returns>
-
         [HttpPost]
         public async Task<IActionResult> Create(UserViewsModels user)
         {
@@ -93,6 +85,7 @@ namespace TaskUser.Controllers
                 "Id", "StoreName",user.StoreId);
             return View();
         }
+        
         /// <summary>
         /// get edit of user
         /// </summary>
@@ -123,7 +116,6 @@ namespace TaskUser.Controllers
         /// </summary>
         /// <param name="userParam"></param>
         /// <returns>index of User else view</returns>
-
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewsModels userParam)
         {
@@ -170,10 +162,10 @@ namespace TaskUser.Controllers
                     TempData["EditPasswordSuccessfuly"] = _passwordLocalizer.GetLocalizedString("msg_EditPasswordSuccessfuly").ToString();
                     return PartialView("_ChangePassword",passwordUser);    
                 }        
-                ViewData["EditPasswordFailure"] = "err_PasswordFailure";
+                ViewData["EditPasswordFailure"] = _passwordLocalizer.GetLocalizedString("err_PasswordFailure");
                 return PartialView("_ChangePassword",passwordUser);       
             }
-            ViewData["EditPasswordFailure"] = "err_PasswordFailure";
+            ViewData["EditPasswordFailure"] = _passwordLocalizer.GetLocalizedString("err_PasswordFailure");
             return PartialView("_ChangePassword",passwordUser);
         }
 
@@ -195,8 +187,6 @@ namespace TaskUser.Controllers
             return RedirectToAction("Index");
             
         }
-
-
         
     }
     

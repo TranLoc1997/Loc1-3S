@@ -20,7 +20,8 @@ namespace TaskUser.Controllers
             _localizer = localizer;
 
         }
-        // GET
+        
+   
         /// <summary>
         /// show index brand
         /// </summary>
@@ -32,6 +33,7 @@ namespace TaskUser.Controllers
 
 
         }
+        
         /// <summary>
         /// get create brand
         /// </summary>
@@ -41,6 +43,7 @@ namespace TaskUser.Controllers
         {
             return View();
         }
+        
         /// <summary>
         /// post create brand
         /// </summary>
@@ -61,6 +64,7 @@ namespace TaskUser.Controllers
             ViewData["AddFailure"] = _brandLocalizer.GetLocalizedString("err_AddFailure");
             return View();
         }
+        
         /// <summary>
         /// get edit brand
         /// </summary>
@@ -77,6 +81,7 @@ namespace TaskUser.Controllers
            
             return View(getBrand);
         }
+        
         /// <summary>
         /// post edit brand
         /// </summary>
@@ -106,6 +111,7 @@ namespace TaskUser.Controllers
             ViewData["EditFailure"] = _brandLocalizer.GetLocalizedString("err_EditFailure");
             return View();
         }
+        
         /// <summary>
         /// get delete
         /// </summary>
