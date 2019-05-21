@@ -57,7 +57,7 @@ namespace TaskUser.Controllers
                     var name = _userService.GetName(model.Email);
                     
                     HttpContext.Session.SetString("name",name.Name);
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Store");
                 }
             }
             return View();
@@ -66,6 +66,10 @@ namespace TaskUser.Controllers
 
 
         }
+        /// <summary>
+        /// Logout 
+        /// </summary>
+        /// <returns>Login xóa session name</returns>
         [ServiceFilter(typeof(ActionFilter))]
         [HttpGet]
         public IActionResult Logout()

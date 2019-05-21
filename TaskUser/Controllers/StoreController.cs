@@ -31,13 +31,7 @@ namespace TaskUser.Controllers
 
         }
         
-        [HttpGet]
-        public IActionResult Back()
-        {
-
-            return RedirectToAction("Index");
-
-        }
+        
         /// <summary>
         /// get create of store
         /// </summary>

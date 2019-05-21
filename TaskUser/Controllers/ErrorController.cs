@@ -4,7 +4,10 @@ namespace TaskUser.Controllers
 {
     public class ErrorController : Controller
     {
-        // GET
+        /// <summary>
+        /// Lổi 401
+        /// </summary>
+        /// <returns>View 401</returns>
         [Route("Error/401")]
         public IActionResult Error401()
         {

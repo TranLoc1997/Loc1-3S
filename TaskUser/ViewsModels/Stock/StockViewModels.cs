@@ -1,6 +1,4 @@
-﻿using TaskUser.Models.Sales;
-
-namespace TaskUser.ViewsModels.Stock
+﻿namespace TaskUser.ViewsModels.Stock
 {
     public class StockViewModels
     {

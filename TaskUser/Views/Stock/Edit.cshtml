@@ -1,11 +1,11 @@
 ﻿@model TaskUser.ViewsModels.Stock.StockViewModels
 
-
-
 @{
     ViewBag.Title = StockLocalizer.GetLocalizedString("lbl_EditStock");
     Layout = "_Layout";
 }
+
+
 <div class="container">
     @if (ViewData["EditFailure"] != null)
     {

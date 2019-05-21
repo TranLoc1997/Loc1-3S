@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TaskUser.Models.Sales;
 
 namespace TaskUser.ViewsModels.Store
 {
@@ -13,7 +12,7 @@ namespace TaskUser.ViewsModels.Store
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public virtual ICollection<Models.Sales.User> users { get; set; }
+        public virtual ICollection<Models.Sales.User> Users { get; set; }
         
         public virtual ICollection<Models.Production.Stock>Stocks { get; set; }
     }

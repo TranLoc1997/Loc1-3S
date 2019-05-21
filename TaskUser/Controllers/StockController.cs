@@ -11,7 +11,9 @@ namespace TaskUser.Controllers
     [ServiceFilter(typeof(ActionFilter))]
     public class StockController : Controller
     {
-        // GET
+        /// <summary>
+        /// Isevice
+        /// </summary>
        private readonly IStockService _stockService;
         private readonly IStoreService _storeService;
         private readonly IProductService _productService;

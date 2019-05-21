@@ -21,7 +21,7 @@
         <div class="form-group col-xs-6">
             <label>@StockLocalizer.GetLocalizedString("lbl_StoreId")</label>
             <select class="form-control" asp-for="StoreId" asp-items="@ViewBag.StoreId">
-                @* <option asp-for="StoreId" >@ViewBag.StoreId[""]</option> *@
+               
             </select>
             
             <span asp-validation-for="StoreId"></span>

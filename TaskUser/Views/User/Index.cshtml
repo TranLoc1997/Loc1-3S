@@ -1,12 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
 @model List<TaskUser.ViewsModels.User.UserViewsModels>
-<style type="text/css">.usermanege { }</style>
+<style type="text/css"></style>
 
 
 <link rel="stylesheet" href="~/css/indexcs.css" />
 
 @{
-    ViewBag.Title =@UserLocalizer.GetLocalizedString("lbl_UserManage");
+    ViewBag.Title =UserLocalizer.GetLocalizedString("lbl_UserManage");
     Layout = "_Layout";
 }
 
@@ -14,7 +14,7 @@
 <div class="container-fuld">
     
     <div class="alert" >
-        <h1 class="usermanege" align="center">
+        <h1  align="center">
            @UserLocalizer.GetLocalizedString("lbl_UserManage")
         </h1>
         
@@ -57,7 +57,6 @@
         <a class="btn" style="color: black" asp-action="Create">
             <img src="~/img/add.png" alt="Smiley face" height="32" width="32">
         </a>
-
 
         @foreach (var item in Model)
         {

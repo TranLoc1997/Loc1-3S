@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using TaskUser.Models.Production;
 using TaskUser.ViewsModels.Category;
 using TaskUser.ViewsModels.Product;
 using TaskUser.ViewsModels.Stock;

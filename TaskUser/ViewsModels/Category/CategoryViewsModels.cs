@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TaskUser.Models.Production;
 
 namespace TaskUser.ViewsModels.Category
 {
